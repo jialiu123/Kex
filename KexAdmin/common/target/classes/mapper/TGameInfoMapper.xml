@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author liu,jia -->
+<mapper namespace="com.moba.mapper.TGameInfoMapper">
+
+    <resultMap id="tGameInfoResultForList" type="TGameInfo">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="GAME_NAME" property="gameName" jdbcType="VARCHAR"/>
+        <result column="GAME_DEVELOPER" property="gameDeveloper" jdbcType="VARCHAR"/>
+        <result column="GAME_PLATFORM" property="gamePlatform" jdbcType="INTEGER"/>
+        <result column="GAME_CLASS" property="gameClass" jdbcType="INTEGER"/>
+        <result column="GAME_THEME" property="gameTheme" jdbcType="VARCHAR"/>
+        <result column="GAME_CONTENT" property="gameContent" jdbcType="VARCHAR"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="ADD_USER_NAME" property="addUserName" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+        <result column="LOCALE_NAME" property="localeName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="tGameInfoResult" extends="tGameInfoResultForList" type="TGameInfo">
+    </resultMap>
+
+    <resultMap id="tGameInfoResultMap" extends="tGameInfoResultForList" type="TGameInfo">
+        <result column="typeName" property="map.typeName" jdbcType="VARCHAR"/>
+        <result column="clsName" property="map.clsName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="sf-tGameInfo">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="gameName != null and gameName != ''">AND a.GAME_NAME = #{gameName}</if>
+        <if test="gameDeveloper != null and gameDeveloper != ''">AND a.GAME_DEVELOPER = #{gameDeveloper}</if>
+        <if test="gamePlatform != null">AND a.GAME_PLATFORM = #{gamePlatform}</if>
+        <if test="gameClass != null">AND a.GAME_CLASS = #{gameClass}</if>
+        <if test="gameTheme != null and gameTheme != ''">AND a.GAME_THEME = #{gameTheme}</if>
+        <if test="gameContent != null and gameContent != ''">AND a.GAME_CONTENT = #{gameContent}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="addUserName != null and addUserName != ''">AND a.ADD_USER_NAME = #{addUserName}</if>
+        <if test="updateDate != null">AND a.UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUserId != null">AND a.UPDATE_USER_ID = #{updateUserId}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+
+        <if test="map.gameNameLike != null and map.gameNameLike != ''">AND a.GAME_NAME like '%'
+            #{map.gameNameLike} '%'
+        </if>
+        <if test="localeName != null and localeName != ''">AND a.LOCALE_NAME = #{localeName}</if>
+
+    </sql>
+
+    <select id="selectEntity" resultMap="tGameInfoResultMap">
+        select a.* ,b.TYPE_NAME as typeName,c.CLS_NAME as clsName
+        from t_game_info a
+        left join base_data b on a.GAME_PLATFORM = b.ID
+        left join base_class c on a.game_class = c.CLS_ID
+        where 1 = 1
+        <include refid="sf-tGameInfo"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="tGameInfoResultMap">
+        select a.* ,b.TYPE_NAME as typeName,c.CLS_NAME as clsName
+        from t_game_info a
+        left join base_data b on a.GAME_PLATFORM = b.ID
+        left join base_class c on a.game_class = c.CLS_ID
+        where 1 = 1
+        <include refid="sf-tGameInfo"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from t_game_info a where 1 = 1
+        <include refid="sf-tGameInfo"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="tGameInfoResultMap">
+        select a.* ,b.TYPE_NAME as typeName,c.CLS_NAME as clsName
+        from t_game_info a
+        left join base_data b on a.GAME_PLATFORM = b.ID
+        left join base_class c on a.game_class = c.CLS_ID
+        where 1 = 1
+        <include refid="sf-tGameInfo"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into t_game_info (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="gameName != null">GAME_NAME,</if>
+            <if test="gameDeveloper != null">GAME_DEVELOPER,</if>
+            <if test="gamePlatform != null">GAME_PLATFORM,</if>
+            <if test="gameClass != null">GAME_CLASS,</if>
+            <if test="gameTheme != null">GAME_THEME,</if>
+            <if test="gameContent != null">GAME_CONTENT,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="addUserName != null">ADD_USER_NAME,</if>
+            <if test="updateDate != null">UPDATE_DATE,</if>
+            <if test="updateUserId != null">UPDATE_USER_ID,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+            <if test="localeName != null">LOCALE_NAME,</if>
+
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="gameName != null">#{gameName},</if>
+            <if test="gameDeveloper != null">#{gameDeveloper},</if>
+            <if test="gamePlatform != null">#{gamePlatform},</if>
+            <if test="gameClass != null">#{gameClass},</if>
+            <if test="gameTheme != null">#{gameTheme},</if>
+            <if test="gameContent != null">#{gameContent},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="addUserName != null">#{addUserName},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+            <if test="localeName != null">#{localeName},</if>
+
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update t_game_info
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="gameName != null">GAME_NAME = #{gameName},</if>
+            <if test="gameDeveloper != null">GAME_DEVELOPER = #{gameDeveloper},</if>
+            <if test="gamePlatform != null">GAME_PLATFORM = #{gamePlatform},</if>
+            <if test="gameClass != null">GAME_CLASS = #{gameClass},</if>
+            <if test="gameTheme != null">GAME_THEME = #{gameTheme},</if>
+            <if test="gameContent != null">GAME_CONTENT = #{gameContent},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="addUserName != null">ADD_USER_NAME = #{addUserName},</if>
+            <if test="updateDate != null">UPDATE_DATE = #{updateDate},</if>
+            <if test="updateUserId != null">UPDATE_USER_ID = #{updateUserId},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+            <if test="localeName != null">LOCALE_NAME = #{localeName},</if>
+
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from t_game_info where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

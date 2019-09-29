@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author ding,ning -->
+<mapper namespace="com.moba.mapper.BaseDataMapper">
+
+    <resultMap id="baseDataResultForList" type="BaseData">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="TYPE" property="type" jdbcType="INTEGER"/>
+        <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR"/>
+        <result column="TYPE_VALUE" property="typeValue" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="INTEGER"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="ORDER_VALUE" property="orderValue" jdbcType="INTEGER"/>
+        <result column="IS_LOCK" property="isLock" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+        <result column="LOCALE_NAME" property="localeName" jdbcType="VARCHAR"/>
+        <result column="PRE_DATA" property="preData" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="baseDataResult" extends="baseDataResultForList" type="BaseData">
+    </resultMap>
+
+    <sql id="sf-baseData">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="type != null">AND a.TYPE = #{type}</if>
+        <if test="typeName != null and typeName != ''">AND a.TYPE_NAME = #{typeName}</if>
+        <if test="typeValue != null and typeValue != ''">AND a.TYPE_VALUE = #{typeValue}</if>
+        <if test="value != null">AND a.value = #{value}</if>
+        <if test="filePath != null and filePath != ''">AND a.file_path = #{filePath}</if>
+        <if test="remark != null and remark != ''">AND a.REMARK = #{remark}</if>
+        <if test="orderValue != null">AND a.ORDER_VALUE = #{orderValue}</if>
+        <if test="isLock != null">AND a.IS_LOCK = #{isLock}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="updateDate != null">AND a.UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUserId != null">AND a.UPDATE_USER_ID = #{updateUserId}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+        <if test="localeName != null and localeName != ''">AND a.LOCALE_NAME = #{localeName}</if>
+        <if test="map.typeNameLike != null and map.typeNameLike != ''">AND a.TYPE_NAME like % #{map.typeNameLike} %
+        </if>
+    </sql>
+
+    <select id="selectEntity" resultMap="baseDataResult">
+        select * from base_data a where 1 = 1
+        <include refid="sf-baseData"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="baseDataResultForList">
+        select * from base_data a where 1 = 1
+        <include refid="sf-baseData"/>
+        order by a.ORDER_VALUE desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from base_data a where 1 = 1
+        <include refid="sf-baseData"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="baseDataResult">
+        select * from base_data a where 1 = 1
+        <include refid="sf-baseData"/>
+        order by a.ORDER_VALUE desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into base_data (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="type != null">TYPE,</if>
+            <if test="typeName != null">TYPE_NAME,</if>
+            <if test="typeValue != null">TYPE_VALUE,</if>
+            <if test="value != null">value,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="remark != null">REMARK,</if>
+            <if test="orderValue != null">ORDER_VALUE,</if>
+            <if test="isLock != null">IS_LOCK,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="updateDate != null">UPDATE_DATE,</if>
+            <if test="updateUserId != null">UPDATE_USER_ID,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+            <if test="localeName != null">LOCALE_NAME,</if>
+
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="type != null">#{type},</if>
+            <if test="typeName != null">#{typeName},</if>
+            <if test="typeValue != null">#{typeValue},</if>
+            <if test="value != null">#{value},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="orderValue != null">#{orderValue},</if>
+            <if test="isLock != null">#{isLock},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+            <if test="localeName != null">#{localeName},</if>
+
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update base_data
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="type != null">TYPE = #{type},</if>
+            <if test="typeName != null">TYPE_NAME = #{typeName},</if>
+            <if test="typeValue != null">TYPE_VALUE = #{typeValue},</if>
+            <if test="value != null">value = #{value},</if>
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="remark != null">REMARK = #{remark},</if>
+            <if test="orderValue != null">ORDER_VALUE = #{orderValue},</if>
+            <if test="isLock != null">IS_LOCK = #{isLock},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="updateDate != null">UPDATE_DATE = #{updateDate},</if>
+            <if test="updateUserId != null">UPDATE_USER_ID = #{updateUserId},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+            <if test="localeName != null">LOCALE_NAME = #{localeName},</if>
+
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from base_data where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

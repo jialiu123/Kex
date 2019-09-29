@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author liu,jia -->
+<mapper namespace="com.moba.mapper.SysModuleMapper">
+
+    <resultMap id="sysModuleResultForList" type="SysModule">
+        <result column="MOD_ID" property="modId" jdbcType="BIGINT"/>
+        <result column="MOD_GROUP" property="modGroup" jdbcType="INTEGER"/>
+        <result column="PAR_ID" property="parId" jdbcType="BIGINT"/>
+        <result column="MOD_NAME" property="modName" jdbcType="VARCHAR"/>
+        <result column="MOD_DESC" property="modDesc" jdbcType="VARCHAR"/>
+        <result column="MOD_URL" property="modUrl" jdbcType="VARCHAR"/>
+        <result column="MOD_LEVEL" property="modLevel" jdbcType="INTEGER"/>
+        <result column="IS_LEAF" property="isLeaf" jdbcType="INTEGER"/>
+        <result column="PPDM_CODE" property="ppdmCode" jdbcType="VARCHAR"/>
+        <result column="ORDER_VALUE" property="orderValue" jdbcType="BIGINT"/>
+        <result column="IS_PUBLIC" property="isPublic" jdbcType="INTEGER"/>
+        <result column="IS_LOCK" property="isLock" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="FONT_AWESOME" property="fontAwesome" jdbcType="VARCHAR"/>
+        <result column="AUTHORITY_CODE" property="authorityCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="sysModuleResult" extends="sysModuleResultForList" type="SysModule">
+    </resultMap>
+
+    <sql id="sf-sysModule">
+        <if test="modId != null">AND a.MOD_ID = #{modId}</if>
+        <if test="modGroup != null">AND a.MOD_GROUP = #{modGroup}</if>
+        <if test="parId != null">AND a.PAR_ID = #{parId}</if>
+        <if test="modName != null and modName != ''">AND a.MOD_NAME = #{modName}</if>
+        <if test="modDesc != null and modDesc != ''">AND a.MOD_DESC = #{modDesc}</if>
+        <if test="modUrl != null and modUrl != ''">AND a.MOD_URL = #{modUrl}</if>
+        <if test="modLevel != null">AND a.MOD_LEVEL = #{modLevel}</if>
+        <if test="isLeaf != null">AND a.IS_LEAF = #{isLeaf}</if>
+        <if test="ppdmCode != null and ppdmCode != ''">AND a.PPDM_CODE = #{ppdmCode}</if>
+        <if test="orderValue != null">AND a.ORDER_VALUE = #{orderValue}</if>
+        <if test="isPublic != null">AND a.IS_PUBLIC = #{isPublic}</if>
+        <if test="isLock != null">AND a.IS_LOCK = #{isLock}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="fontAwesome != null and fontAwesome != ''">AND a.FONT_AWESOME = #{fontAwesome}</if>
+        <if test="authorityCode != null and authorityCode != ''">AND a.authority_code = #{authorityCode}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="sysModuleResult">
+        select * from sys_module a where 1 = 1
+        <include refid="sf-sysModule"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="sysModuleResultForList">
+        <if test="map.userId == null || map.userId == ''">
+            select * from sys_module a where 1 = 1
+            <include refid="sf-sysModule"/>
+            order by a.mod_id desc
+            <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+        </if>
+        <if test="map.userId != null and map.userId != ''">
+            select a.*
+            from sys_module a
+            where
+            a.is_del = 0
+            <if test="map.modLevel != null and map.modLevel != ''">a.mod_level = #{map.modLevel}</if>
+            and mod_id in (
+            select mod_id from mod_popedom t
+            where t.user_id = #{map.userId}
+            union all select mod_id from mod_popedom t
+            where t.role_id in (select r.role_id from role_user r where
+            r.user_id = #{map.userId})
+            <if test="null != map.isManager">union all select mod_id from sys_module where is_public = 1 and is_del =
+                0
+            </if>
+            <if test="null != map.isAdmin">union all select mod_id from sys_module where is_public = 9 and is_del =
+                0
+            </if>
+            <if test="null != map.queryCustomerPublic">union all select mod_id from sys_module where mod_group =
+                10 and is_del = 0
+            </if>
+            )
+            <include refid="sf-sysModule"/>
+            order by a.mod_id desc
+            <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+        </if>
+
+
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from sys_module a where 1 = 1
+        <include refid="sf-sysModule"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="sysModuleResult">
+        select * from sys_module a where 1 = 1
+        <include refid="sf-sysModule"/>
+        order by a.mod_id desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into sys_module (]]>
+        <trim suffixOverrides=",">
+            <if test="modId != null">MOD_ID,</if>
+            <if test="modGroup != null">MOD_GROUP,</if>
+            <if test="parId != null">PAR_ID,</if>
+            <if test="modName != null">MOD_NAME,</if>
+            <if test="modDesc != null">MOD_DESC,</if>
+            <if test="modUrl != null">MOD_URL,</if>
+            <if test="modLevel != null">MOD_LEVEL,</if>
+            <if test="isLeaf != null">IS_LEAF,</if>
+            <if test="ppdmCode != null">PPDM_CODE,</if>
+            <if test="orderValue != null">ORDER_VALUE,</if>
+            <if test="isPublic != null">IS_PUBLIC,</if>
+            <if test="isLock != null">IS_LOCK,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="fontAwesome != null">FONT_AWESOME,</if>
+            <if test="authorityCode != null">AUTHORITY_CODE,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="modId != null">#{modId},</if>
+            <if test="modGroup != null">#{modGroup},</if>
+            <if test="parId != null">#{parId},</if>
+            <if test="modName != null">#{modName},</if>
+            <if test="modDesc != null">#{modDesc},</if>
+            <if test="modUrl != null">#{modUrl},</if>
+            <if test="modLevel != null">#{modLevel},</if>
+            <if test="isLeaf != null">#{isLeaf},</if>
+            <if test="ppdmCode != null">#{ppdmCode},</if>
+            <if test="orderValue != null">#{orderValue},</if>
+            <if test="isPublic != null">#{isPublic},</if>
+            <if test="isLock != null">#{isLock},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="fontAwesome != null">#{fontAwesome},</if>
+            <if test="authorityCode != null">#{authorityCode},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update sys_module
+        <set>
+            <if test="modId != null">MOD_ID = #{modId},</if>
+            <if test="modGroup != null">MOD_GROUP = #{modGroup},</if>
+            <if test="parId != null">PAR_ID = #{parId},</if>
+            <if test="modName != null">MOD_NAME = #{modName},</if>
+            <if test="modDesc != null">MOD_DESC = #{modDesc},</if>
+            <if test="modUrl != null">MOD_URL = #{modUrl},</if>
+            <if test="modLevel != null">MOD_LEVEL = #{modLevel},</if>
+            <if test="isLeaf != null">IS_LEAF = #{isLeaf},</if>
+            <if test="ppdmCode != null">PPDM_CODE = #{ppdmCode},</if>
+            <if test="orderValue != null">ORDER_VALUE = #{orderValue},</if>
+            <if test="isPublic != null">IS_PUBLIC = #{isPublic},</if>
+            <if test="isLock != null">IS_LOCK = #{isLock},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="fontAwesome != null">FONT_AWESOME = #{fontAwesome},</if>
+            <if test="authorityCode != null">FONT_AWESOME = #{authorityCode},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from sys_module where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

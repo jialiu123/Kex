@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author li,bai,qiang -->
+<mapper namespace="com.moba.mapper.UserMoneyApplyMapper">
+
+    <resultMap id="userMoneyApplyResultForList" type="UserMoneyApply">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="CASH_COUNT_BEFORE" property="cashCountBefore" jdbcType="DECIMAL"/>
+        <result column="CASH_COUNT" property="cashCount" jdbcType="DECIMAL"/>
+        <result column="CASH_COUNT_AFTER" property="cashCountAfter" jdbcType="DECIMAL"/>
+        <result column="CASH_TYPE" property="cashType" jdbcType="INTEGER"/>
+        <result column="ADD_UID" property="addUid" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ADD_MEMO" property="addMemo" jdbcType="VARCHAR"/>
+        <result column="AUDIT_UID" property="auditUid" jdbcType="INTEGER"/>
+        <result column="AUDIT_DATE" property="auditDate" jdbcType="TIMESTAMP"/>
+        <result column="AUDIT_MEMO" property="auditMemo" jdbcType="VARCHAR"/>
+        <result column="INFO_STATE" property="infoState" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+        <result column="CASH_PAY" property="cashPay" jdbcType="DECIMAL"/>
+        <result column="CASH_RATE" property="cashRate" jdbcType="DECIMAL"/>
+        <result column="REAL_NAME" property="realName" jdbcType="VARCHAR"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR"/>
+        <result column="BANK_ACCOUNT" property="bankAccount" jdbcType="VARCHAR"/>
+        <result column="BANK_ACCOUNT_NAME" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="TUIKUAN_MEMO" property="tuikuanMemo" jdbcType="VARCHAR"/>
+        <result column="TUIKUAN_DATE" property="tuikuanDate" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="PROOF_IMG" property="proofImg" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="userMoneyApplyResult" extends="userMoneyApplyResultForList" type="UserMoneyApply">
+    </resultMap>
+
+    <sql id="sf-userMoneyApply">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="userId != null">AND a.USER_ID = #{userId}</if>
+        <if test="cashCountBefore != null">AND a.CASH_COUNT_BEFORE = #{cashCountBefore}</if>
+        <if test="cashCount != null">AND a.CASH_COUNT = #{cashCount}</if>
+        <if test="cashCountAfter != null">AND a.CASH_COUNT_AFTER = #{cashCountAfter}</if>
+        <if test="cashType != null">AND a.CASH_TYPE = #{cashType}</if>
+        <if test="addUid != null">AND a.ADD_UID = #{addUid}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="addMemo != null and addMemo != ''">AND a.ADD_MEMO = #{addMemo}</if>
+        <if test="auditUid != null">AND a.AUDIT_UID = #{auditUid}</if>
+        <if test="auditDate != null">AND a.AUDIT_DATE = #{auditDate}</if>
+        <if test="auditMemo != null and auditMemo != ''">AND a.AUDIT_MEMO = #{auditMemo}</if>
+        <if test="infoState != null">AND a.INFO_STATE = #{infoState}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+        <if test="cashPay != null">AND a.CASH_PAY = #{cashPay}</if>
+        <if test="cashRate != null">AND a.CASH_RATE = #{cashRate}</if>
+        <if test="realName != null and realName != ''">AND a.REAL_NAME = #{realName}</if>
+        <if test="mobile != null and mobile != ''">AND a.MOBILE = #{mobile}</if>
+        <if test="bankName != null and bankName != ''">AND a.BANK_NAME = #{bankName}</if>
+        <if test="bankAccount != null and bankAccount != ''">AND a.BANK_ACCOUNT = #{bankAccount}</if>
+        <if test="bankAccountName != null and bankAccountName != ''">AND a.BANK_ACCOUNT_NAME = #{bankAccountName}</if>
+        <if test="tuikuanMemo != null and tuikuanMemo != ''">AND a.TUIKUAN_MEMO = #{tuikuanMemo}</if>
+        <if test="tuikuanDate != null">AND a.TUIKUAN_DATE = #{tuikuanDate}</if>
+        <if test="remark != null and remark != ''">AND a.REMARK = #{remark}</if>
+        <if test="proofImg != null and proofImg != ''">AND a.PROOF_IMG = #{proofImg}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="userMoneyApplyResult">
+        select * from user_money_apply a where 1 = 1
+        <include refid="sf-userMoneyApply"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="userMoneyApplyResultForList">
+        select * from user_money_apply a where 1 = 1
+        <include refid="sf-userMoneyApply"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from user_money_apply a where 1 = 1
+        <include refid="sf-userMoneyApply"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="userMoneyApplyResult">
+        select * from user_money_apply a where 1 = 1
+        <include refid="sf-userMoneyApply"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into user_money_apply (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="userId != null">USER_ID,</if>
+            <if test="cashCountBefore != null">CASH_COUNT_BEFORE,</if>
+            <if test="cashCount != null">CASH_COUNT,</if>
+            <if test="cashCountAfter != null">CASH_COUNT_AFTER,</if>
+            <if test="cashType != null">CASH_TYPE,</if>
+            <if test="addUid != null">ADD_UID,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="addMemo != null">ADD_MEMO,</if>
+            <if test="auditUid != null">AUDIT_UID,</if>
+            <if test="auditDate != null">AUDIT_DATE,</if>
+            <if test="auditMemo != null">AUDIT_MEMO,</if>
+            <if test="infoState != null">INFO_STATE,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+            <if test="cashPay != null">CASH_PAY,</if>
+            <if test="cashRate != null">CASH_RATE,</if>
+            <if test="realName != null">REAL_NAME,</if>
+            <if test="mobile != null">MOBILE,</if>
+            <if test="bankName != null">BANK_NAME,</if>
+            <if test="bankAccount != null">BANK_ACCOUNT,</if>
+            <if test="bankAccountName != null">BANK_ACCOUNT_NAME,</if>
+            <if test="tuikuanMemo != null">TUIKUAN_MEMO,</if>
+            <if test="tuikuanDate != null">TUIKUAN_DATE,</if>
+            <if test="remark != null">REMARK,</if>
+            <if test="proofImg != null">PROOF_IMG,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="cashCountBefore != null">#{cashCountBefore},</if>
+            <if test="cashCount != null">#{cashCount},</if>
+            <if test="cashCountAfter != null">#{cashCountAfter},</if>
+            <if test="cashType != null">#{cashType},</if>
+            <if test="addUid != null">#{addUid},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="addMemo != null">#{addMemo},</if>
+            <if test="auditUid != null">#{auditUid},</if>
+            <if test="auditDate != null">#{auditDate},</if>
+            <if test="auditMemo != null">#{auditMemo},</if>
+            <if test="infoState != null">#{infoState},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+            <if test="cashPay != null">#{cashPay},</if>
+            <if test="cashRate != null">#{cashRate},</if>
+            <if test="realName != null">#{realName},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="bankAccount != null">#{bankAccount},</if>
+            <if test="bankAccountName != null">#{bankAccountName},</if>
+            <if test="tuikuanMemo != null">#{tuikuanMemo},</if>
+            <if test="tuikuanDate != null">#{tuikuanDate},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="proofImg != null">#{proofImg},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update user_money_apply
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="userId != null">USER_ID = #{userId},</if>
+            <if test="cashCountBefore != null">CASH_COUNT_BEFORE = #{cashCountBefore},</if>
+            <if test="cashCount != null">CASH_COUNT = #{cashCount},</if>
+            <if test="cashCountAfter != null">CASH_COUNT_AFTER = #{cashCountAfter},</if>
+            <if test="cashType != null">CASH_TYPE = #{cashType},</if>
+            <if test="addUid != null">ADD_UID = #{addUid},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="addMemo != null">ADD_MEMO = #{addMemo},</if>
+            <if test="auditUid != null">AUDIT_UID = #{auditUid},</if>
+            <if test="auditDate != null">AUDIT_DATE = #{auditDate},</if>
+            <if test="auditMemo != null">AUDIT_MEMO = #{auditMemo},</if>
+            <if test="infoState != null">INFO_STATE = #{infoState},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+            <if test="cashPay != null">CASH_PAY = #{cashPay},</if>
+            <if test="cashRate != null">CASH_RATE = #{cashRate},</if>
+            <if test="realName != null">REAL_NAME = #{realName},</if>
+            <if test="mobile != null">MOBILE = #{mobile},</if>
+            <if test="bankName != null">BANK_NAME = #{bankName},</if>
+            <if test="bankAccount != null">BANK_ACCOUNT = #{bankAccount},</if>
+            <if test="bankAccountName != null">BANK_ACCOUNT_NAME = #{bankAccountName},</if>
+            <if test="tuikuanMemo != null">TUIKUAN_MEMO = #{tuikuanMemo},</if>
+            <if test="tuikuanDate != null">TUIKUAN_DATE = #{tuikuanDate},</if>
+            <if test="remark != null">REMARK = #{remark},</if>
+            <if test="proofImg != null">PROOF_IMG = #{proofImg},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from user_money_apply where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

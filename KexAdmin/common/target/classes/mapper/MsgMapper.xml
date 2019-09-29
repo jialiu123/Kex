@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author li, bai,qiang -->
+<mapper namespace="com.moba.mapper.MsgMapper">
+
+    <resultMap id="msgResultForList" type="Msg">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="MSG_TYPE" property="msgType" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="SEND_USER_ID" property="sendUserId" jdbcType="INTEGER"/>
+        <result column="SEND_USER_NAME" property="sendUserName" jdbcType="VARCHAR"/>
+        <result column="MSG_TITLE" property="msgTitle" jdbcType="VARCHAR"/>
+        <result column="MSG_CONTENT" property="msgContent" jdbcType="LONGVARCHAR"/>
+        <result column="SEND_TIME" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="INFO_STATE" property="infoState" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="msgResult" extends="msgResultForList" type="Msg">
+    </resultMap>
+
+    <sql id="sf-msg">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="msgType != null">AND a.MSG_TYPE = #{msgType}</if>
+        <if test="userId != null">AND a.USER_ID = #{userId}</if>
+        <if test="sendUserId != null">AND a.SEND_USER_ID = #{sendUserId}</if>
+        <if test="sendUserName != null and sendUserName != ''">AND a.SEND_USER_NAME = #{sendUserName}</if>
+        <if test="msgTitle != null and msgTitle != ''">AND a.MSG_TITLE = #{msgTitle}</if>
+        <if test="msgContent != null">AND a.MSG_CONTENT = #{msgContent}</if>
+        <if test="sendTime != null">AND a.SEND_TIME = #{sendTime}</if>
+        <if test="infoState != null">AND a.INFO_STATE = #{infoState}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="updateDate != null">AND a.UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUserId != null">AND a.UPDATE_USER_ID = #{updateUserId}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="msgResult">
+        select * from msg a where 1 = 1
+        <include refid="sf-msg"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="msgResultForList">
+        select * from msg a where 1 = 1
+        <include refid="sf-msg"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from msg a where 1 = 1
+        <include refid="sf-msg"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="msgResult">
+        select * from msg a where 1 = 1
+        <include refid="sf-msg"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into msg (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="msgType != null">MSG_TYPE,</if>
+            <if test="userId != null">USER_ID,</if>
+            <if test="sendUserId != null">SEND_USER_ID,</if>
+            <if test="sendUserName != null">SEND_USER_NAME,</if>
+            <if test="msgTitle != null">MSG_TITLE,</if>
+            <if test="msgContent != null">MSG_CONTENT,</if>
+            <if test="sendTime != null">SEND_TIME,</if>
+            <if test="infoState != null">INFO_STATE,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="updateDate != null">UPDATE_DATE,</if>
+            <if test="updateUserId != null">UPDATE_USER_ID,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="msgType != null">#{msgType},</if>
+            <if test="userId != null">#{userId},</if>
+
+            <if test="sendUserId != null">#{sendUserId},</if>
+            <if test="sendUserName != null">#{sendUserName},</if>
+            <if test="msgTitle != null">#{msgTitle},</if>
+            <if test="msgContent != null">#{msgContent},</if>
+            <if test="sendTime != null">#{sendTime},</if>
+            <if test="infoState != null">#{infoState},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update msg
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="msgType != null">MSG_TYPE = #{msgType},</if>
+            <if test="userId != null">USER_ID = #{userId},</if>
+            <if test="sendUserId != null">SEND_USER_ID = #{sendUserId},</if>
+            <if test="sendUserName != null">SEND_USER_NAME = #{sendUserName},</if>
+            <if test="msgTitle != null">MSG_TITLE = #{msgTitle},</if>
+            <if test="msgContent != null">MSG_CONTENT = #{msgContent},</if>
+            <if test="sendTime != null">SEND_TIME = #{sendTime},</if>
+            <if test="infoState != null">INFO_STATE = #{infoState},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="updateDate != null">UPDATE_DATE = #{updateDate},</if>
+            <if test="updateUserId != null">UPDATE_USER_ID = #{updateUserId},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from msg where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

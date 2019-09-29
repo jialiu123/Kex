@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author li, bai, qiang -->
+<mapper namespace="com.moba.mapper.OrderInfoMapper">
+
+    <resultMap id="orderInfoResultForList" type="OrderInfo">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="TRADE_INDEX" property="tradeIndex" jdbcType="VARCHAR"/>
+        <result column="ORDER_TYPE" property="orderType" jdbcType="INTEGER"/>
+        <result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER"/>
+        <result column="ORDER_MONEY" property="orderMoney" jdbcType="DECIMAL"/>
+        <result column="ORDER_STATE" property="orderState" jdbcType="INTEGER"/>
+        <result column="PAY_TYPE" property="payType" jdbcType="INTEGER"/>
+        <result column="MONEY_BI" property="moneyBi" jdbcType="DECIMAL"/>
+        <result column="SHIPPING_ADDRESS_ID" property="shippingAddressId" jdbcType="INTEGER"/>
+        <result column="ORDER_DATE" property="orderDate" jdbcType="TIMESTAMP"/>
+        <result column="INVOICE_TYPE" property="invoiceType" jdbcType="INTEGER"/>
+        <result column="INVOICES_PAYABLE" property="invoicesPayable" jdbcType="VARCHAR"/>
+        <result column="DELIVERY_TIME" property="deliveryTime" jdbcType="VARCHAR"/>
+        <result column="INVOICE_STATUS" property="invoiceStatus" jdbcType="INTEGER"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ENTP_ID" property="entpId" jdbcType="INTEGER"/>
+        <result column="ENTP_NAME" property="entpName" jdbcType="VARCHAR"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="ADD_USER_NAME" property="addUserName" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="MATFLOW_PRICE" property="matflowPrice" jdbcType="DECIMAL"/>
+        <result column="PAY_DATE" property="payDate" jdbcType="TIMESTAMP"/>
+        <result column="ORDER_WEIGHT" property="orderWeight" jdbcType="DECIMAL"/>
+        <result column="IS_FREESHIP" property="isFreeship" jdbcType="INTEGER"/>
+        <result column="IS_PRICE_MODIFY" property="isPriceModify" jdbcType="INTEGER"/>
+        <result column="PRICE_MODIFY_OLD" property="priceModifyOld" jdbcType="DECIMAL"/>
+        <result column="PRICE_MODIFY_DATE" property="priceModifyDate" jdbcType="TIMESTAMP"/>
+        <result column="PRICE_MODIFY_REMARK" property="priceModifyRemark" jdbcType="VARCHAR"/>
+        <result column="MATFLOW_PRICE_MODIFY_OLD" property="matflowPriceModifyOld" jdbcType="DECIMAL"/>
+        <result column="PRICE_MODIFY_USER_ID" property="priceModifyUserId" jdbcType="INTEGER"/>
+        <result column="REL_NAME" property="relName" jdbcType="VARCHAR"/>
+        <result column="REL_PHONE" property="relPhone" jdbcType="VARCHAR"/>
+        <result column="REL_TEL" property="relTel" jdbcType="VARCHAR"/>
+        <result column="REL_PROVINCE" property="relProvince" jdbcType="INTEGER"/>
+        <result column="REL_CITY" property="relCity" jdbcType="INTEGER"/>
+        <result column="REL_REGION" property="relRegion" jdbcType="INTEGER"/>
+        <result column="REL_ADDR" property="relAddr" jdbcType="VARCHAR"/>
+        <result column="REL_EMAIL" property="relEmail" jdbcType="VARCHAR"/>
+        <result column="REL_ZIP" property="relZip" jdbcType="INTEGER"/>
+        <result column="YHQ_ID" property="yhqId" jdbcType="INTEGER"/>
+        <result column="YHQ_TIP_DESC" property="yhqTipDesc" jdbcType="VARCHAR"/>
+        <result column="TRADE_NO" property="tradeNo" jdbcType="VARCHAR"/>
+        <result column="TRADE_MERGER_INDEX" property="tradeMergerIndex" jdbcType="VARCHAR"/>
+        <result column="QRSH_DATE" property="qrshDate" jdbcType="TIMESTAMP"/>
+        <result column="ORDER_MONEY_COST" property="orderMoneyCost" jdbcType="DECIMAL"/>
+        <result column="ORDER_PASSWORD" property="orderPassword" jdbcType="VARCHAR"/>
+        <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP"/>
+        <result column="FAHUO_DATE" property="fahuoDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_OPT" property="isOpt" jdbcType="INTEGER"/>
+        <result column="MONEY_CASH" property="moneyCash" jdbcType="DECIMAL"/>
+        <result column="PAY_PLATFORM" property="payPlatform" jdbcType="INTEGER"/>
+        <result column="NO_DIS_MONEY" property="noDisMoney" jdbcType="DECIMAL"/>
+        <result column="PROFIT_MONEY" property="profitMoney" jdbcType="DECIMAL"/>
+        <result column="PROFIT_BL" property="profitBl" jdbcType="DECIMAL"/>
+        <result column="FINISH_DATE" property="finishDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_COMMENT" property="isComment" jdbcType="INTEGER"/>
+        <result column="FP_STATE" property="fpState" jdbcType="INTEGER"/>
+        <result column="ENTP_CHARGE_NO" property="entpChargeNo" jdbcType="VARCHAR"/>
+        <result column="INVOICES_NO" property="invoicesNo" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="orderInfoResult" extends="orderInfoResultForList" type="OrderInfo">
+    </resultMap>
+
+    <sql id="sf-orderInfo">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="tradeIndex != null and tradeIndex != ''">AND a.TRADE_INDEX = #{tradeIndex}</if>
+        <if test="orderType != null">AND a.ORDER_TYPE = #{orderType}</if>
+        <if test="orderNum != null">AND a.ORDER_NUM = #{orderNum}</if>
+        <if test="orderMoney != null">AND a.ORDER_MONEY = #{orderMoney}</if>
+        <if test="orderState != null">AND a.ORDER_STATE = #{orderState}</if>
+        <if test="payType != null">AND a.PAY_TYPE = #{payType}</if>
+        <if test="moneyBi != null">AND a.MONEY_BI = #{moneyBi}</if>
+        <if test="shippingAddressId != null">AND a.SHIPPING_ADDRESS_ID = #{shippingAddressId}</if>
+        <if test="orderDate != null">AND a.ORDER_DATE = #{orderDate}</if>
+        <if test="invoiceType != null">AND a.INVOICE_TYPE = #{invoiceType}</if>
+        <if test="invoicesPayable != null and invoicesPayable != ''">AND a.INVOICES_PAYABLE = #{invoicesPayable}</if>
+        <if test="deliveryTime != null and deliveryTime != ''">AND a.DELIVERY_TIME = #{deliveryTime}</if>
+        <if test="invoiceStatus != null">AND a.INVOICE_STATUS = #{invoiceStatus}</if>
+        <if test="remark != null and remark != ''">AND a.REMARK = #{remark}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="entpId != null">AND a.ENTP_ID = #{entpId}</if>
+        <if test="entpName != null and entpName != ''">AND a.ENTP_NAME = #{entpName}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="addUserName != null and addUserName != ''">AND a.ADD_USER_NAME = #{addUserName}</if>
+        <if test="updateDate != null">AND a.UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUserId != null">AND a.UPDATE_USER_ID = #{updateUserId}</if>
+        <if test="matflowPrice != null">AND a.MATFLOW_PRICE = #{matflowPrice}</if>
+        <if test="payDate != null">AND a.PAY_DATE = #{payDate}</if>
+        <if test="orderWeight != null">AND a.ORDER_WEIGHT = #{orderWeight}</if>
+        <if test="isFreeship != null">AND a.IS_FREESHIP = #{isFreeship}</if>
+        <if test="isPriceModify != null">AND a.IS_PRICE_MODIFY = #{isPriceModify}</if>
+        <if test="priceModifyOld != null">AND a.PRICE_MODIFY_OLD = #{priceModifyOld}</if>
+        <if test="priceModifyDate != null">AND a.PRICE_MODIFY_DATE = #{priceModifyDate}</if>
+        <if test="priceModifyRemark != null and priceModifyRemark != ''">AND a.PRICE_MODIFY_REMARK =
+            #{priceModifyRemark}
+        </if>
+        <if test="matflowPriceModifyOld != null">AND a.MATFLOW_PRICE_MODIFY_OLD = #{matflowPriceModifyOld}</if>
+        <if test="priceModifyUserId != null">AND a.PRICE_MODIFY_USER_ID = #{priceModifyUserId}</if>
+        <if test="relName != null and relName != ''">AND a.REL_NAME = #{relName}</if>
+        <if test="relPhone != null and relPhone != ''">AND a.REL_PHONE = #{relPhone}</if>
+        <if test="relTel != null and relTel != ''">AND a.REL_TEL = #{relTel}</if>
+        <if test="relProvince != null">AND a.REL_PROVINCE = #{relProvince}</if>
+        <if test="relCity != null">AND a.REL_CITY = #{relCity}</if>
+        <if test="relRegion != null">AND a.REL_REGION = #{relRegion}</if>
+        <if test="relAddr != null and relAddr != ''">AND a.REL_ADDR = #{relAddr}</if>
+        <if test="relEmail != null and relEmail != ''">AND a.REL_EMAIL = #{relEmail}</if>
+        <if test="relZip != null">AND a.REL_ZIP = #{relZip}</if>
+        <if test="yhqId != null">AND a.YHQ_ID = #{yhqId}</if>
+        <if test="yhqTipDesc != null and yhqTipDesc != ''">AND a.YHQ_TIP_DESC = #{yhqTipDesc}</if>
+        <if test="tradeNo != null and tradeNo != ''">AND a.TRADE_NO = #{tradeNo}</if>
+        <if test="tradeMergerIndex != null and tradeMergerIndex != ''">AND a.TRADE_MERGER_INDEX = #{tradeMergerIndex}
+        </if>
+        <if test="qrshDate != null">AND a.QRSH_DATE = #{qrshDate}</if>
+        <if test="orderMoneyCost != null">AND a.ORDER_MONEY_COST = #{orderMoneyCost}</if>
+        <if test="orderPassword != null and orderPassword != ''">AND a.ORDER_PASSWORD = #{orderPassword}</if>
+        <if test="endDate != null">AND a.END_DATE = #{endDate}</if>
+        <if test="fahuoDate != null">AND a.FAHUO_DATE = #{fahuoDate}</if>
+        <if test="isOpt != null">AND a.IS_OPT = #{isOpt}</if>
+        <if test="moneyCash != null">AND a.MONEY_CASH = #{moneyCash}</if>
+        <if test="payPlatform != null">AND a.PAY_PLATFORM = #{payPlatform}</if>
+        <if test="noDisMoney != null">AND a.NO_DIS_MONEY = #{noDisMoney}</if>
+        <if test="profitMoney != null">AND a.PROFIT_MONEY = #{profitMoney}</if>
+        <if test="profitBl != null">AND a.PROFIT_BL = #{profitBl}</if>
+        <if test="finishDate != null">AND a.FINISH_DATE = #{finishDate}</if>
+        <if test="isComment != null">AND a.IS_COMMENT = #{isComment}</if>
+        <if test="fpState != null">AND a.FP_STATE = #{fpState}</if>
+        <if test="entpChargeNo != null and entpChargeNo != ''">AND a.ENTP_CHARGE_NO = #{entpChargeNo}</if>
+        <if test="invoicesNo != null and invoicesNo != ''">AND a.INVOICES_NO = #{invoicesNo}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="orderInfoResult">
+        select * from order_info a where 1 = 1
+        <include refid="sf-orderInfo"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="orderInfoResultForList">
+        select * from order_info a where 1 = 1
+        <include refid="sf-orderInfo"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from order_info a where 1 = 1
+        <include refid="sf-orderInfo"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="orderInfoResult">
+        select * from order_info a where 1 = 1
+        <include refid="sf-orderInfo"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into order_info (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="tradeIndex != null">TRADE_INDEX,</if>
+            <if test="orderType != null">ORDER_TYPE,</if>
+            <if test="orderNum != null">ORDER_NUM,</if>
+            <if test="orderMoney != null">ORDER_MONEY,</if>
+            <if test="orderState != null">ORDER_STATE,</if>
+            <if test="payType != null">PAY_TYPE,</if>
+            <if test="moneyBi != null">MONEY_BI,</if>
+            <if test="shippingAddressId != null">SHIPPING_ADDRESS_ID,</if>
+            <if test="orderDate != null">ORDER_DATE,</if>
+            <if test="invoiceType != null">INVOICE_TYPE,</if>
+            <if test="invoicesPayable != null">INVOICES_PAYABLE,</if>
+            <if test="deliveryTime != null">DELIVERY_TIME,</if>
+            <if test="invoiceStatus != null">INVOICE_STATUS,</if>
+            <if test="remark != null">REMARK,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="entpId != null">ENTP_ID,</if>
+            <if test="entpName != null">ENTP_NAME,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="addUserName != null">ADD_USER_NAME,</if>
+            <if test="updateDate != null">UPDATE_DATE,</if>
+            <if test="updateUserId != null">UPDATE_USER_ID,</if>
+            <if test="matflowPrice != null">MATFLOW_PRICE,</if>
+            <if test="payDate != null">PAY_DATE,</if>
+            <if test="orderWeight != null">ORDER_WEIGHT,</if>
+            <if test="isFreeship != null">IS_FREESHIP,</if>
+            <if test="isPriceModify != null">IS_PRICE_MODIFY,</if>
+            <if test="priceModifyOld != null">PRICE_MODIFY_OLD,</if>
+            <if test="priceModifyDate != null">PRICE_MODIFY_DATE,</if>
+            <if test="priceModifyRemark != null">PRICE_MODIFY_REMARK,</if>
+            <if test="matflowPriceModifyOld != null">MATFLOW_PRICE_MODIFY_OLD,</if>
+            <if test="priceModifyUserId != null">PRICE_MODIFY_USER_ID,</if>
+            <if test="relName != null">REL_NAME,</if>
+            <if test="relPhone != null">REL_PHONE,</if>
+            <if test="relTel != null">REL_TEL,</if>
+            <if test="relProvince != null">REL_PROVINCE,</if>
+            <if test="relCity != null">REL_CITY,</if>
+            <if test="relRegion != null">REL_REGION,</if>
+            <if test="relAddr != null">REL_ADDR,</if>
+            <if test="relEmail != null">REL_EMAIL,</if>
+            <if test="relZip != null">REL_ZIP,</if>
+            <if test="yhqId != null">YHQ_ID,</if>
+            <if test="yhqTipDesc != null">YHQ_TIP_DESC,</if>
+            <if test="tradeNo != null">TRADE_NO,</if>
+            <if test="tradeMergerIndex != null">TRADE_MERGER_INDEX,</if>
+            <if test="qrshDate != null">QRSH_DATE,</if>
+            <if test="orderMoneyCost != null">ORDER_MONEY_COST,</if>
+            <if test="orderPassword != null">ORDER_PASSWORD,</if>
+            <if test="endDate != null">END_DATE,</if>
+            <if test="fahuoDate != null">FAHUO_DATE,</if>
+            <if test="isOpt != null">IS_OPT,</if>
+            <if test="moneyCash != null">MONEY_CASH,</if>
+            <if test="payPlatform != null">PAY_PLATFORM,</if>
+            <if test="noDisMoney != null">NO_DIS_MONEY,</if>
+            <if test="profitMoney != null">PROFIT_MONEY,</if>
+            <if test="profitBl != null">PROFIT_BL,</if>
+            <if test="finishDate != null">FINISH_DATE,</if>
+            <if test="isComment != null">IS_COMMENT,</if>
+            <if test="fpState != null">FP_STATE,</if>
+            <if test="entpChargeNo != null">ENTP_CHARGE_NO,</if>
+            <if test="invoicesNo != null">INVOICES_NO,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="tradeIndex != null">#{tradeIndex},</if>
+            <if test="orderType != null">#{orderType},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="orderMoney != null">#{orderMoney},</if>
+            <if test="orderState != null">#{orderState},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="moneyBi != null">#{moneyBi},</if>
+            <if test="shippingAddressId != null">#{shippingAddressId},</if>
+            <if test="orderDate != null">#{orderDate},</if>
+            <if test="invoiceType != null">#{invoiceType},</if>
+            <if test="invoicesPayable != null">#{invoicesPayable},</if>
+            <if test="deliveryTime != null">#{deliveryTime},</if>
+            <if test="invoiceStatus != null">#{invoiceStatus},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="entpId != null">#{entpId},</if>
+            <if test="entpName != null">#{entpName},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="addUserName != null">#{addUserName},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="matflowPrice != null">#{matflowPrice},</if>
+            <if test="payDate != null">#{payDate},</if>
+            <if test="orderWeight != null">#{orderWeight},</if>
+            <if test="isFreeship != null">#{isFreeship},</if>
+            <if test="isPriceModify != null">#{isPriceModify},</if>
+            <if test="priceModifyOld != null">#{priceModifyOld},</if>
+            <if test="priceModifyDate != null">#{priceModifyDate},</if>
+            <if test="priceModifyRemark != null">#{priceModifyRemark},</if>
+            <if test="matflowPriceModifyOld != null">#{matflowPriceModifyOld},</if>
+            <if test="priceModifyUserId != null">#{priceModifyUserId},</if>
+            <if test="relName != null">#{relName},</if>
+            <if test="relPhone != null">#{relPhone},</if>
+            <if test="relTel != null">#{relTel},</if>
+            <if test="relProvince != null">#{relProvince},</if>
+            <if test="relCity != null">#{relCity},</if>
+            <if test="relRegion != null">#{relRegion},</if>
+            <if test="relAddr != null">#{relAddr},</if>
+            <if test="relEmail != null">#{relEmail},</if>
+            <if test="relZip != null">#{relZip},</if>
+            <if test="yhqId != null">#{yhqId},</if>
+            <if test="yhqTipDesc != null">#{yhqTipDesc},</if>
+            <if test="tradeNo != null">#{tradeNo},</if>
+            <if test="tradeMergerIndex != null">#{tradeMergerIndex},</if>
+            <if test="qrshDate != null">#{qrshDate},</if>
+            <if test="orderMoneyCost != null">#{orderMoneyCost},</if>
+            <if test="orderPassword != null">#{orderPassword},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="fahuoDate != null">#{fahuoDate},</if>
+            <if test="isOpt != null">#{isOpt},</if>
+            <if test="moneyCash != null">#{moneyCash},</if>
+            <if test="payPlatform != null">#{payPlatform},</if>
+            <if test="noDisMoney != null">#{noDisMoney},</if>
+            <if test="profitMoney != null">#{profitMoney},</if>
+            <if test="profitBl != null">#{profitBl},</if>
+            <if test="finishDate != null">#{finishDate},</if>
+            <if test="isComment != null">#{isComment},</if>
+            <if test="fpState != null">#{fpState},</if>
+            <if test="entpChargeNo != null">#{entpChargeNo},</if>
+            <if test="invoicesNo != null">#{invoicesNo},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update order_info
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="tradeIndex != null">TRADE_INDEX = #{tradeIndex},</if>
+            <if test="orderType != null">ORDER_TYPE = #{orderType},</if>
+            <if test="orderNum != null">ORDER_NUM = #{orderNum},</if>
+            <if test="orderMoney != null">ORDER_MONEY = #{orderMoney},</if>
+            <if test="orderState != null">ORDER_STATE = #{orderState},</if>
+            <if test="payType != null">PAY_TYPE = #{payType},</if>
+            <if test="moneyBi != null">MONEY_BI = #{moneyBi},</if>
+            <if test="shippingAddressId != null">SHIPPING_ADDRESS_ID = #{shippingAddressId},</if>
+            <if test="orderDate != null">ORDER_DATE = #{orderDate},</if>
+            <if test="invoiceType != null">INVOICE_TYPE = #{invoiceType},</if>
+            <if test="invoicesPayable != null">INVOICES_PAYABLE = #{invoicesPayable},</if>
+            <if test="deliveryTime != null">DELIVERY_TIME = #{deliveryTime},</if>
+            <if test="invoiceStatus != null">INVOICE_STATUS = #{invoiceStatus},</if>
+            <if test="remark != null">REMARK = #{remark},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="entpId != null">ENTP_ID = #{entpId},</if>
+            <if test="entpName != null">ENTP_NAME = #{entpName},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="addUserName != null">ADD_USER_NAME = #{addUserName},</if>
+            <if test="updateDate != null">UPDATE_DATE = #{updateDate},</if>
+            <if test="updateUserId != null">UPDATE_USER_ID = #{updateUserId},</if>
+            <if test="matflowPrice != null">MATFLOW_PRICE = #{matflowPrice},</if>
+            <if test="payDate != null">PAY_DATE = #{payDate},</if>
+            <if test="orderWeight != null">ORDER_WEIGHT = #{orderWeight},</if>
+            <if test="isFreeship != null">IS_FREESHIP = #{isFreeship},</if>
+            <if test="isPriceModify != null">IS_PRICE_MODIFY = #{isPriceModify},</if>
+            <if test="priceModifyOld != null">PRICE_MODIFY_OLD = #{priceModifyOld},</if>
+            <if test="priceModifyDate != null">PRICE_MODIFY_DATE = #{priceModifyDate},</if>
+            <if test="priceModifyRemark != null">PRICE_MODIFY_REMARK = #{priceModifyRemark},</if>
+            <if test="matflowPriceModifyOld != null">MATFLOW_PRICE_MODIFY_OLD = #{matflowPriceModifyOld},</if>
+            <if test="priceModifyUserId != null">PRICE_MODIFY_USER_ID = #{priceModifyUserId},</if>
+            <if test="relName != null">REL_NAME = #{relName},</if>
+            <if test="relPhone != null">REL_PHONE = #{relPhone},</if>
+            <if test="relTel != null">REL_TEL = #{relTel},</if>
+            <if test="relProvince != null">REL_PROVINCE = #{relProvince},</if>
+            <if test="relCity != null">REL_CITY = #{relCity},</if>
+            <if test="relRegion != null">REL_REGION = #{relRegion},</if>
+            <if test="relAddr != null">REL_ADDR = #{relAddr},</if>
+            <if test="relEmail != null">REL_EMAIL = #{relEmail},</if>
+            <if test="relZip != null">REL_ZIP = #{relZip},</if>
+            <if test="yhqId != null">YHQ_ID = #{yhqId},</if>
+            <if test="yhqTipDesc != null">YHQ_TIP_DESC = #{yhqTipDesc},</if>
+            <if test="tradeNo != null">TRADE_NO = #{tradeNo},</if>
+            <if test="tradeMergerIndex != null">TRADE_MERGER_INDEX = #{tradeMergerIndex},</if>
+            <if test="qrshDate != null">QRSH_DATE = #{qrshDate},</if>
+            <if test="orderMoneyCost != null">ORDER_MONEY_COST = #{orderMoneyCost},</if>
+            <if test="orderPassword != null">ORDER_PASSWORD = #{orderPassword},</if>
+            <if test="endDate != null">END_DATE = #{endDate},</if>
+            <if test="fahuoDate != null">FAHUO_DATE = #{fahuoDate},</if>
+            <if test="isOpt != null">IS_OPT = #{isOpt},</if>
+            <if test="moneyCash != null">MONEY_CASH = #{moneyCash},</if>
+            <if test="payPlatform != null">PAY_PLATFORM = #{payPlatform},</if>
+            <if test="noDisMoney != null">NO_DIS_MONEY = #{noDisMoney},</if>
+            <if test="profitMoney != null">PROFIT_MONEY = #{profitMoney},</if>
+            <if test="profitBl != null">PROFIT_BL = #{profitBl},</if>
+            <if test="finishDate != null">FINISH_DATE = #{finishDate},</if>
+            <if test="isComment != null">IS_COMMENT = #{isComment},</if>
+            <if test="fpState != null">FP_STATE = #{fpState},</if>
+            <if test="entpChargeNo != null">ENTP_CHARGE_NO = #{entpChargeNo},</if>
+            <if test="invoicesNo != null">INVOICES_NO = #{invoicesNo},</if>
+
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="map.orderStateFrontState != null">AND ORDER_STATE = #{map.orderStateFrontState}</if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from order_info where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

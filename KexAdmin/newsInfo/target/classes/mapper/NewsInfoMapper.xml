@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author li,bai,qiang -->
+<mapper namespace="com.moba.mapper.NewsInfoMapper">
+
+    <resultMap id="newsInfoResultForList" type="NewsInfo">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="UUID" property="uuid" jdbcType="VARCHAR"/>
+        <result column="MOD_ID" property="modId" jdbcType="VARCHAR"/>
+        <result column="TITLE" property="title" jdbcType="VARCHAR"/>
+        <result column="TITLE_COLOR" property="titleColor" jdbcType="VARCHAR"/>
+        <result column="TITLE_IS_STRONG" property="titleIsStrong" jdbcType="INTEGER"/>
+        <result column="TITLE_SHORT" property="titleShort" jdbcType="VARCHAR"/>
+        <result column="TITLE_SUB" property="titleSub" jdbcType="VARCHAR"/>
+        <result column="IS_USE_DIRECT_URI" property="isUseDirectUri" jdbcType="INTEGER"/>
+        <result column="DIRECT_URI" property="directUri" jdbcType="VARCHAR"/>
+        <result column="KEYWORD" property="keyword" jdbcType="VARCHAR"/>
+        <result column="IMAGE_PATH" property="imagePath" jdbcType="VARCHAR"/>
+        <result column="IMAGE_DESC" property="imageDesc" jdbcType="VARCHAR"/>
+        <result column="SUMMARY" property="summary" jdbcType="VARCHAR"/>
+        <result column="AUTHOR" property="author" jdbcType="VARCHAR"/>
+        <result column="INFO_SOURCE" property="infoSource" jdbcType="VARCHAR"/>
+        <result column="IS_USE_INVALID_DATE" property="isUseInvalidDate" jdbcType="INTEGER"/>
+        <result column="INVALID_DATE" property="invalidDate" jdbcType="TIMESTAMP"/>
+        <result column="PUB_TIME" property="pubTime" jdbcType="TIMESTAMP"/>
+        <result column="VIEW_COUNT" property="viewCount" jdbcType="INTEGER"/>
+        <result column="VIEW_DATETIME" property="viewDatetime" jdbcType="TIMESTAMP"/>
+        <result column="INFO_STATE" property="infoState" jdbcType="INTEGER"/>
+        <result column="ORDER_VALUE" property="orderValue" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="VIDEO_PATH" property="videoPath" jdbcType="VARCHAR"/>
+        <result column="VIDEO_DESC" property="videoDesc" jdbcType="VARCHAR"/>
+        <result column="LOCALE_NAME" property="localeName" jdbcType="VARCHAR"/>
+        <result column="LANGUAGE" property="language" jdbcType="VARCHAR"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <resultMap id="newsInfoResult" extends="newsInfoResultForList" type="NewsInfo">
+    </resultMap>
+
+    <sql id="sf-newsInfo">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="uuid != null and uuid != ''">AND a.UUID = #{uuid}</if>
+        <if test="modId != null and modId != ''">AND a.MOD_ID = #{modId}</if>
+        <if test="title != null and title != ''">AND a.TITLE = #{title}</if>
+        <if test="titleColor != null and titleColor != ''">AND a.TITLE_COLOR = #{titleColor}</if>
+        <if test="titleIsStrong != null">AND a.TITLE_IS_STRONG = #{titleIsStrong}</if>
+        <if test="titleShort != null and titleShort != ''">AND a.TITLE_SHORT = #{titleShort}</if>
+        <if test="titleSub != null and titleSub != ''">AND a.TITLE_SUB = #{titleSub}</if>
+        <if test="isUseDirectUri != null">AND a.IS_USE_DIRECT_URI = #{isUseDirectUri}</if>
+        <if test="directUri != null and directUri != ''">AND a.DIRECT_URI = #{directUri}</if>
+        <if test="keyword != null and keyword != ''">AND a.KEYWORD = #{keyword}</if>
+        <if test="imagePath != null and imagePath != ''">AND a.IMAGE_PATH = #{imagePath}</if>
+        <if test="imageDesc != null and imageDesc != ''">AND a.IMAGE_DESC = #{imageDesc}</if>
+        <if test="summary != null and summary != ''">AND a.SUMMARY = #{summary}</if>
+        <if test="author != null and author != ''">AND a.AUTHOR = #{author}</if>
+        <if test="infoSource != null and infoSource != ''">AND a.INFO_SOURCE = #{infoSource}</if>
+        <if test="isUseInvalidDate != null">AND a.IS_USE_INVALID_DATE = #{isUseInvalidDate}</if>
+        <if test="invalidDate != null">AND a.INVALID_DATE = #{invalidDate}</if>
+        <if test="pubTime != null">AND a.PUB_TIME = #{pubTime}</if>
+        <if test="viewCount != null">AND a.VIEW_COUNT = #{viewCount}</if>
+        <if test="viewDatetime != null">AND a.VIEW_DATETIME = #{viewDatetime}</if>
+        <if test="infoState != null">AND a.INFO_STATE = #{infoState}</if>
+        <if test="orderValue != null">AND a.ORDER_VALUE = #{orderValue}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="videoPath != null and videoPath != ''">AND a.VIDEO_PATH = #{videoPath}</if>
+        <if test="videoDesc != null and videoDesc != ''">AND a.VIDEO_DESC = #{videoDesc}</if>
+        <if test="localeName != null and localeName != ''">AND a.LOCALE_NAME = #{localeName}</if>
+        <if test="language != null and language != ''">AND a.LANGUAGE = #{language}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="updateDate != null">AND a.UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUserId != null">AND a.UPDATE_USER_ID = #{updateUserId}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+
+        <if test="map.titleLike != null and map.titleLike != ''">AND a.TITLE like '%'
+            #{map.titleLike} '%'
+        </if>
+        <if test="map.enAddDate != null">AND
+            <![CDATA[
+			a.ADD_DATE <= str_to_date(#map.enAddDate:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		    ]]>
+        </if>
+        <if test="map.atAddDate != null">AND
+            <![CDATA[
+			a.ADD_DATE >= str_to_date(#map.atAddDate:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		    ]]>
+        </if>
+        <if test="map.infoState != null">AND a.INFO_STATE =#{map.infoState}
+        </if>
+    </sql>
+
+    <select id="selectEntity" resultMap="newsInfoResult">
+        select a.* from news_info a
+        where 1 = 1
+        <include refid="sf-newsInfo"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="newsInfoResultForList">
+        select * from news_info a where 1 = 1
+        <include refid="sf-newsInfo"/>
+        order by a.ORDER_VALUE desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from news_info a where 1 = 1
+        <include refid="sf-newsInfo"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="newsInfoResultForList">
+        select a.* from news_info a
+        where 1 = 1
+        <include refid="sf-newsInfo"/>
+        order by a.ORDER_VALUE desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into news_info (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="uuid != null">UUID,</if>
+            <if test="modId != null">MOD_ID,</if>
+            <if test="title != null">TITLE,</if>
+            <if test="titleColor != null">TITLE_COLOR,</if>
+            <if test="titleIsStrong != null">TITLE_IS_STRONG,</if>
+            <if test="titleShort != null">TITLE_SHORT,</if>
+            <if test="titleSub != null">TITLE_SUB,</if>
+            <if test="isUseDirectUri != null">IS_USE_DIRECT_URI,</if>
+            <if test="directUri != null">DIRECT_URI,</if>
+            <if test="keyword != null">KEYWORD,</if>
+            <if test="imagePath != null">IMAGE_PATH,</if>
+            <if test="imageDesc != null">IMAGE_DESC,</if>
+            <if test="summary != null">SUMMARY,</if>
+            <if test="author != null">AUTHOR,</if>
+            <if test="infoSource != null">INFO_SOURCE,</if>
+            <if test="isUseInvalidDate != null">IS_USE_INVALID_DATE,</if>
+            <if test="invalidDate != null">INVALID_DATE,</if>
+            <if test="pubTime != null">PUB_TIME,</if>
+            <if test="viewCount != null">VIEW_COUNT,</if>
+            <if test="viewDatetime != null">VIEW_DATETIME,</if>
+            <if test="infoState != null">INFO_STATE,</if>
+            <if test="orderValue != null">ORDER_VALUE,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="videoPath != null">VIDEO_PATH,</if>
+            <if test="videoDesc != null">VIDEO_DESC,</if>
+            <if test="localeName != null">LOCALE_NAME,</if>
+            <if test="language != null">LANGUAGE,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="updateDate != null">UPDATE_DATE,</if>
+            <if test="updateUserId != null">UPDATE_USER_ID,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uuid != null">#{uuid},</if>
+            <if test="modId != null">#{modId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="titleColor != null">#{titleColor},</if>
+            <if test="titleIsStrong != null">#{titleIsStrong},</if>
+            <if test="titleShort != null">#{titleShort},</if>
+            <if test="titleSub != null">#{titleSub},</if>
+            <if test="isUseDirectUri != null">#{isUseDirectUri},</if>
+            <if test="directUri != null">#{directUri},</if>
+            <if test="keyword != null">#{keyword},</if>
+            <if test="imagePath != null">#{imagePath},</if>
+            <if test="imageDesc != null">#{imageDesc},</if>
+            <if test="summary != null">#{summary},</if>
+            <if test="author != null">#{author},</if>
+            <if test="infoSource != null">#{infoSource},</if>
+            <if test="isUseInvalidDate != null">#{isUseInvalidDate},</if>
+            <if test="invalidDate != null">#{invalidDate},</if>
+            <if test="pubTime != null">#{pubTime},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="viewDatetime != null">#{viewDatetime},</if>
+            <if test="infoState != null">#{infoState},</if>
+            <if test="orderValue != null">#{orderValue},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="videoPath != null">#{videoPath},</if>
+            <if test="videoDesc != null">#{videoDesc},</if>
+            <if test="localeName != null">#{localeName},</if>
+            <if test="language != null">#{language},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update news_info
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="uuid != null">UUID = #{uuid},</if>
+            <if test="modId != null">MOD_ID = #{modId},</if>
+            <if test="title != null">TITLE = #{title},</if>
+            <if test="titleColor != null">TITLE_COLOR = #{titleColor},</if>
+            <if test="titleIsStrong != null">TITLE_IS_STRONG = #{titleIsStrong},</if>
+            <if test="titleShort != null">TITLE_SHORT = #{titleShort},</if>
+            <if test="titleSub != null">TITLE_SUB = #{titleSub},</if>
+            <if test="isUseDirectUri != null">IS_USE_DIRECT_URI = #{isUseDirectUri},</if>
+            <if test="directUri != null">DIRECT_URI = #{directUri},</if>
+            <if test="keyword != null">KEYWORD = #{keyword},</if>
+            <if test="imagePath != null">IMAGE_PATH = #{imagePath},</if>
+            <if test="imageDesc != null">IMAGE_DESC = #{imageDesc},</if>
+            <if test="summary != null">SUMMARY = #{summary},</if>
+            <if test="author != null">AUTHOR = #{author},</if>
+            <if test="infoSource != null">INFO_SOURCE = #{infoSource},</if>
+            <if test="isUseInvalidDate != null">IS_USE_INVALID_DATE = #{isUseInvalidDate},</if>
+            <if test="invalidDate != null">INVALID_DATE = #{invalidDate},</if>
+            <if test="pubTime != null">PUB_TIME = #{pubTime},</if>
+            <if test="viewCount != null">VIEW_COUNT = #{viewCount},</if>
+            <if test="viewDatetime != null">VIEW_DATETIME = #{viewDatetime},</if>
+            <if test="infoState != null">INFO_STATE = #{infoState},</if>
+            <if test="orderValue != null">ORDER_VALUE = #{orderValue},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="videoPath != null">VIDEO_PATH = #{videoPath},</if>
+            <if test="videoDesc != null">VIDEO_DESC = #{videoDesc},</if>
+            <if test="localeName != null">LOCALE_NAME = #{localeName},</if>
+            <if test="language != null">LANGUAGE = #{language},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="updateDate != null">UPDATE_DATE = #{updateDate},</if>
+            <if test="updateUserId != null">UPDATE_USER_ID = #{updateUserId},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from news_info where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

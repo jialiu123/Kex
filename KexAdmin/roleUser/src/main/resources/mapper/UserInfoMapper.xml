@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author liu,jia -->
+<mapper namespace="com.moba.mapper.UserInfoMapper">
+
+    <resultMap id="userInfoResultForList" type="UserInfo">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="REAL_NAME" property="realName" jdbcType="VARCHAR"/>
+        <result column="USER_TYPE" property="userType" jdbcType="INTEGER"/>
+        <result column="USER_LEVEL" property="userLevel" jdbcType="INTEGER"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="OWN_ENTP_ID" property="ownEntpId" jdbcType="INTEGER"/>
+        <result column="OWN_ENTP_NAME" property="ownEntpName" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="INTEGER"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="POSITIONS" property="positions" jdbcType="VARCHAR"/>
+        <result column="OFFICE_TEL" property="officeTel" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="LOGIN_COUNT" property="loginCount" jdbcType="INTEGER"/>
+        <result column="LAST_LOGIN_IP" property="lastLoginIp" jdbcType="VARCHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="ORDER_VALUE" property="orderValue" jdbcType="INTEGER"/>
+        <result column="IS_LOCK" property="isLock" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+        <result column="IS_AUDIT" property="isAudit" jdbcType="INTEGER"/>
+        <result column="IS_ACTIVE" property="isActive" jdbcType="INTEGER"/>
+        <result column="IS_ACTIVATE" property="isActivate" jdbcType="INTEGER"/>
+        <result column="SIGN" property="sign" jdbcType="VARCHAR"/>
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+        <result column="KEY_IS_ACTIVE" property="keyIsActive" jdbcType="INTEGER"/>
+        <result column="CUR_SCORE" property="curScore" jdbcType="DECIMAL"/>
+        <result column="DEVICE" property="device" jdbcType="VARCHAR"/>
+        <result column="DEVICE_TOKENS" property="deviceTokens" jdbcType="VARCHAR"/>
+        <result column="BANK_PINDEX" property="bankPindex" jdbcType="INTEGER"/>
+        <result column="BANK_PNAME" property="bankPname" jdbcType="VARCHAR"/>
+        <result column="BANK_BRANCH_NAME" property="bankBranchName" jdbcType="VARCHAR"/>
+        <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR"/>
+        <result column="BANK_ACCOUNT" property="bankAccount" jdbcType="VARCHAR"/>
+        <result column="BANK_ACCOUNT_NAME" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="USER_LOGO" property="userLogo" jdbcType="VARCHAR"/>
+        <result column="APPID_WEIXIN" property="appidWeixin" jdbcType="VARCHAR"/>
+        <result column="APPID_WEIXIN_UNIONID" property="appidWeixinUnionid" jdbcType="VARCHAR"/>
+        <result column="APPID_WEIXIN_IS_FOLLOW" property="appidWeixinIsFollow" jdbcType="INTEGER"/>
+        <result column="APPID_QQ" property="appidQq" jdbcType="VARCHAR"/>
+        <result column="APPID_WEIBO" property="appidWeibo" jdbcType="VARCHAR"/>
+        <result column="P_INDEX" property="pIndex" jdbcType="INTEGER"/>
+        <result column="USER_NO" property="userNo" jdbcType="VARCHAR"/>
+        <result column="IS_ENTP" property="isEntp" jdbcType="INTEGER"/>
+        <result column="IS_FUWU" property="isFuwu" jdbcType="INTEGER"/>
+        <result column="IS_LIANMENG" property="isLianmeng" jdbcType="INTEGER"/>
+        <result column="IS_LIANMENG_DATE" property="isLianmengDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_LIANMENG_CANCELED_DATE" property="isLianmengCanceledDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_DAQU" property="isDaqu" jdbcType="INTEGER"/>
+        <result column="BI_DIANZI" property="biDianzi" jdbcType="DECIMAL"/>
+        <result column="BI_XIAOFEI" property="biXiaofei" jdbcType="DECIMAL"/>
+        <result column="BI_DIANZI_LOCK" property="biDianziLock" jdbcType="DECIMAL"/>
+        <result column="BI_DIANZI_LOST" property="biDianziLost" jdbcType="DECIMAL"/>
+        <result column="BI_HUOKUAN" property="biHuokuan" jdbcType="DECIMAL"/>
+        <result column="BI_HUOKUAN_LOCK" property="biHuokuanLock" jdbcType="DECIMAL"/>
+        <result column="BI_AID" property="biAid" jdbcType="DECIMAL"/>
+        <result column="BI_AID_LOCK" property="biAidLock" jdbcType="DECIMAL"/>
+        <result column="LEIJI_MONEY_USER" property="leijiMoneyUser" jdbcType="DECIMAL"/>
+        <result column="LEIJI_MONEY_ENTP" property="leijiMoneyEntp" jdbcType="DECIMAL"/>
+        <result column="LEIJI_MONEY_TUIGUANG" property="leijiMoneyTuiguang" jdbcType="DECIMAL"/>
+        <result column="YMID" property="ymid" jdbcType="VARCHAR"/>
+        <result column="USER_SCORE_UNION" property="userScoreUnion" jdbcType="DECIMAL"/>
+        <result column="PASSWORD_PAY" property="passwordPay" jdbcType="VARCHAR"/>
+        <result column="IS_SET_SECURITY" property="isSetSecurity" jdbcType="INTEGER"/>
+        <result column="BI_DIANZI_LOCK_TUIGUAN" property="biDianziLockTuiguan" jdbcType="DECIMAL"/>
+        <result column="SCORE_UPDATE_DATE" property="scoreUpdateDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_CLOSED" property="isClosed" jdbcType="INTEGER"/>
+        <result column="DEVICE_TOKEN" property="deviceToken" jdbcType="VARCHAR"/>
+        <result column="DEVICE_TOKEN_APP" property="deviceTokenApp" jdbcType="VARCHAR"/>
+        <result column="IS_RENZHENG" property="isRenzheng" jdbcType="INTEGER"/>
+        <result column="IS_CITY_MANAGER" property="isCityManager" jdbcType="INTEGER"/>
+        <result column="IS_START" property="isStart" jdbcType="INTEGER"/>
+        <result column="IS_HAS_UPDATE_PASS" property="isHasUpdatePass" jdbcType="INTEGER"/>
+        <result column="BI_FUXIAO" property="biFuxiao" jdbcType="DECIMAL"/>
+        <result column="LINK_ENTP_ID" property="linkEntpId" jdbcType="INTEGER"/>
+        <result column="IMG_ID_CARD_ZM" property="imgIdCardZm" jdbcType="VARCHAR"/>
+        <result column="IMG_ID_CARD_FM" property="imgIdCardFm" jdbcType="VARCHAR"/>
+        <result column="OWN_VILLAGE_ID" property="ownVillageId" jdbcType="INTEGER"/>
+        <result column="OWN_VILLAGE_NAME" property="ownVillageName" jdbcType="VARCHAR"/>
+        <result column="IS_VILLAGE" property="isVillage" jdbcType="INTEGER"/>
+        <result column="IS_POOR" property="isPoor" jdbcType="INTEGER"/>
+        <result column="POOR_ID" property="poorId" jdbcType="INTEGER"/>
+        <result column="CARD_END_DATE" property="cardEndDate" jdbcType="TIMESTAMP"/>
+        <result column="autograph" property="autograph" jdbcType="VARCHAR"/>
+        <result column="APP_KEY" property="appKey" jdbcType="VARCHAR"/>
+        <result column="IS_SHUADAN" property="isShuadan" jdbcType="INTEGER"/>
+        <result column="LINK_AREA" property="linkArea" jdbcType="VARCHAR"/>
+        <result column="DOMAIN_SITE" property="domainSite" jdbcType="VARCHAR"/>
+        <result column="MARK_USER_ID" property="markUserId" jdbcType="INTEGER"/>
+        <result column="SERVICE_CENTER_ID" property="serviceCenterId" jdbcType="INTEGER"/>
+        <result column="SERVICE_CENTER_NAME" property="serviceCenterName" jdbcType="VARCHAR"/>
+        <result column="IS_CASHIER" property="isCashier" jdbcType="INTEGER"/>
+        <result column="receive_amount_max" property="receiveAmountMax" jdbcType="DECIMAL"/>
+        <result column="receive_amount_base" property="receiveAmountBase" jdbcType="DECIMAL"/>
+        <result column="receive_amount_extend" property="receiveAmountExtend" jdbcType="DECIMAL"/>
+        <result column="FROM_TYPE" property="fromType" jdbcType="INTEGER"/>
+        <result column="FROM_ID" property="fromId" jdbcType="INTEGER"/>
+        <result column="REN_ZHENG_DATE" property="renZhengDate" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <resultMap id="userInfoResult" extends="userInfoResultForList" type="UserInfo">
+    </resultMap>
+
+    <sql id="sf-userInfo">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="userName != null and userName != ''">AND a.USER_NAME = #{userName}</if>
+        <if test="realName != null and realName != ''">AND a.REAL_NAME = #{realName}</if>
+        <if test="userType != null">AND a.USER_TYPE = #{userType}</if>
+        <if test="userLevel != null">AND a.USER_LEVEL = #{userLevel}</if>
+        <if test="password != null and password != ''">AND a.PASSWORD = #{password}</if>
+        <if test="mobile != null and mobile != ''">AND a.MOBILE = #{mobile}</if>
+        <if test="ownEntpId != null">AND a.OWN_ENTP_ID = #{ownEntpId}</if>
+        <if test="ownEntpName != null and ownEntpName != ''">AND a.OWN_ENTP_NAME = #{ownEntpName}</if>
+        <if test="sex != null">AND a.SEX = #{sex}</if>
+        <if test="birthday != null">AND a.BIRTHDAY = #{birthday}</if>
+        <if test="positions != null and positions != ''">AND a.POSITIONS = #{positions}</if>
+        <if test="officeTel != null and officeTel != ''">AND a.OFFICE_TEL = #{officeTel}</if>
+        <if test="email != null and email != ''">AND a.EMAIL = #{email}</if>
+        <if test="loginCount != null">AND a.LOGIN_COUNT = #{loginCount}</if>
+        <if test="lastLoginIp != null and lastLoginIp != ''">AND a.LAST_LOGIN_IP = #{lastLoginIp}</if>
+        <if test="lastLoginTime != null">AND a.LAST_LOGIN_TIME = #{lastLoginTime}</if>
+        <if test="orderValue != null">AND a.ORDER_VALUE = #{orderValue}</if>
+        <if test="isLock != null">AND a.IS_LOCK = #{isLock}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="updateDate != null">AND a.UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUserId != null">AND a.UPDATE_USER_ID = #{updateUserId}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+        <if test="isAudit != null">AND a.IS_AUDIT = #{isAudit}</if>
+        <if test="isActive != null">AND a.IS_ACTIVE = #{isActive}</if>
+        <if test="isActivate != null">AND a.IS_ACTIVATE = #{isActivate}</if>
+        <if test="sign != null and sign != ''">AND a.SIGN = #{sign}</if>
+        <if test="idCard != null and idCard != ''">AND a.ID_CARD = #{idCard}</if>
+        <if test="keyIsActive != null">AND a.KEY_IS_ACTIVE = #{keyIsActive}</if>
+        <if test="curScore != null">AND a.CUR_SCORE = #{curScore}</if>
+        <if test="device != null and device != ''">AND a.DEVICE = #{device}</if>
+        <if test="deviceTokens != null and deviceTokens != ''">AND a.DEVICE_TOKENS = #{deviceTokens}</if>
+        <if test="bankPindex != null">AND a.BANK_PINDEX = #{bankPindex}</if>
+        <if test="bankPname != null and bankPname != ''">AND a.BANK_PNAME = #{bankPname}</if>
+        <if test="bankBranchName != null and bankBranchName != ''">AND a.BANK_BRANCH_NAME = #{bankBranchName}</if>
+        <if test="bankName != null and bankName != ''">AND a.BANK_NAME = #{bankName}</if>
+        <if test="bankAccount != null and bankAccount != ''">AND a.BANK_ACCOUNT = #{bankAccount}</if>
+        <if test="bankAccountName != null and bankAccountName != ''">AND a.BANK_ACCOUNT_NAME = #{bankAccountName}</if>
+        <if test="userLogo != null and userLogo != ''">AND a.USER_LOGO = #{userLogo}</if>
+        <if test="appidWeixin != null and appidWeixin != ''">AND a.APPID_WEIXIN = #{appidWeixin}</if>
+        <if test="appidWeixinUnionid != null and appidWeixinUnionid != ''">AND a.APPID_WEIXIN_UNIONID =
+            #{appidWeixinUnionid}
+        </if>
+        <if test="appidWeixinIsFollow != null">AND a.APPID_WEIXIN_IS_FOLLOW = #{appidWeixinIsFollow}</if>
+        <if test="appidQq != null and appidQq != ''">AND a.APPID_QQ = #{appidQq}</if>
+        <if test="appidWeibo != null and appidWeibo != ''">AND a.APPID_WEIBO = #{appidWeibo}</if>
+        <if test="pIndex != null">AND a.P_INDEX = #{pIndex}</if>
+        <if test="userNo != null and userNo != ''">AND a.USER_NO = #{userNo}</if>
+        <if test="isEntp != null">AND a.IS_ENTP = #{isEntp}</if>
+        <if test="isFuwu != null">AND a.IS_FUWU = #{isFuwu}</if>
+        <if test="isLianmeng != null">AND a.IS_LIANMENG = #{isLianmeng}</if>
+        <if test="isLianmengDate != null">AND a.IS_LIANMENG_DATE = #{isLianmengDate}</if>
+        <if test="isLianmengCanceledDate != null">AND a.IS_LIANMENG_CANCELED_DATE = #{isLianmengCanceledDate}</if>
+        <if test="isDaqu != null">AND a.IS_DAQU = #{isDaqu}</if>
+        <if test="biDianzi != null">AND a.BI_DIANZI = #{biDianzi}</if>
+        <if test="biXiaofei != null">AND a.BI_XIAOFEI = #{biXiaofei}</if>
+        <if test="biDianziLock != null">AND a.BI_DIANZI_LOCK = #{biDianziLock}</if>
+        <if test="biDianziLost != null">AND a.BI_DIANZI_LOST = #{biDianziLost}</if>
+        <if test="biHuokuan != null">AND a.BI_HUOKUAN = #{biHuokuan}</if>
+        <if test="biHuokuanLock != null">AND a.BI_HUOKUAN_LOCK = #{biHuokuanLock}</if>
+        <if test="biAid != null">AND a.BI_AID = #{biAid}</if>
+        <if test="biAidLock != null">AND a.BI_AID_LOCK = #{biAidLock}</if>
+        <if test="leijiMoneyUser != null">AND a.LEIJI_MONEY_USER = #{leijiMoneyUser}</if>
+        <if test="leijiMoneyEntp != null">AND a.LEIJI_MONEY_ENTP = #{leijiMoneyEntp}</if>
+        <if test="leijiMoneyTuiguang != null">AND a.LEIJI_MONEY_TUIGUANG = #{leijiMoneyTuiguang}</if>
+        <if test="ymid != null and ymid != ''">AND a.YMID = #{ymid}</if>
+        <if test="userScoreUnion != null">AND a.USER_SCORE_UNION = #{userScoreUnion}</if>
+        <if test="passwordPay != null and passwordPay != ''">AND a.PASSWORD_PAY = #{passwordPay}</if>
+        <if test="isSetSecurity != null">AND a.IS_SET_SECURITY = #{isSetSecurity}</if>
+        <if test="biDianziLockTuiguan != null">AND a.BI_DIANZI_LOCK_TUIGUAN = #{biDianziLockTuiguan}</if>
+        <if test="scoreUpdateDate != null">AND a.SCORE_UPDATE_DATE = #{scoreUpdateDate}</if>
+        <if test="isClosed != null">AND a.IS_CLOSED = #{isClosed}</if>
+        <if test="deviceToken != null and deviceToken != ''">AND a.DEVICE_TOKEN = #{deviceToken}</if>
+        <if test="deviceTokenApp != null and deviceTokenApp != ''">AND a.DEVICE_TOKEN_APP = #{deviceTokenApp}</if>
+        <if test="isRenzheng != null">AND a.IS_RENZHENG = #{isRenzheng}</if>
+        <if test="isCityManager != null">AND a.IS_CITY_MANAGER = #{isCityManager}</if>
+        <if test="isStart != null">AND a.IS_START = #{isStart}</if>
+        <if test="isHasUpdatePass != null">AND a.IS_HAS_UPDATE_PASS = #{isHasUpdatePass}</if>
+        <if test="biFuxiao != null">AND a.BI_FUXIAO = #{biFuxiao}</if>
+        <if test="linkEntpId != null">AND a.LINK_ENTP_ID = #{linkEntpId}</if>
+        <if test="imgIdCardZm != null and imgIdCardZm != ''">AND a.IMG_ID_CARD_ZM = #{imgIdCardZm}</if>
+        <if test="imgIdCardFm != null and imgIdCardFm != ''">AND a.IMG_ID_CARD_FM = #{imgIdCardFm}</if>
+        <if test="ownVillageId != null">AND a.OWN_VILLAGE_ID = #{ownVillageId}</if>
+        <if test="ownVillageName != null and ownVillageName != ''">AND a.OWN_VILLAGE_NAME = #{ownVillageName}</if>
+        <if test="isVillage != null">AND a.IS_VILLAGE = #{isVillage}</if>
+        <if test="isPoor != null">AND a.IS_POOR = #{isPoor}</if>
+        <if test="poorId != null">AND a.POOR_ID = #{poorId}</if>
+        <if test="cardEndDate != null">AND a.CARD_END_DATE = #{cardEndDate}</if>
+        <if test="autograph != null and autograph != ''">AND a.autograph = #{autograph}</if>
+        <if test="appKey != null and appKey != ''">AND a.APP_KEY = #{appKey}</if>
+        <if test="isShuadan != null">AND a.IS_SHUADAN = #{isShuadan}</if>
+        <if test="linkArea != null and linkArea != ''">AND a.LINK_AREA = #{linkArea}</if>
+        <if test="domainSite != null and domainSite != ''">AND a.DOMAIN_SITE = #{domainSite}</if>
+        <if test="markUserId != null">AND a.MARK_USER_ID = #{markUserId}</if>
+        <if test="serviceCenterId != null">AND a.SERVICE_CENTER_ID = #{serviceCenterId}</if>
+        <if test="serviceCenterName != null and serviceCenterName != ''">AND a.SERVICE_CENTER_NAME =
+            #{serviceCenterName}
+        </if>
+        <if test="isCashier != null">AND a.IS_CASHIER = #{isCashier}</if>
+        <if test="receiveAmountMax != null">AND a.receive_amount_max = #{receiveAmountMax}</if>
+        <if test="receiveAmountBase != null">AND a.receive_amount_base = #{receiveAmountBase}</if>
+        <if test="receiveAmountExtend != null">AND a.receive_amount_extend = #{receiveAmountExtend}</if>
+        <if test="fromType != null">AND a.FROM_TYPE = #{fromType}</if>
+        <if test="fromId != null">AND a.FROM_ID = #{fromId}</if>
+        <if test="renZhengDate != null">AND a.REN_ZHENG_DATE = #{renZhengDate}</if>
+
+
+        <if test="map.userNameLike != null and map.userNameLike != ''">AND a.USER_NAME like '%'
+            #{map.userNameLike} '%'
+        </if>
+    </sql>
+
+    <select id="selectEntity" resultMap="userInfoResult">
+        select * from user_info a where 1 = 1
+        <include refid="sf-userInfo"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="userInfoResultForList">
+        select * from user_info a where 1 = 1
+        <include refid="sf-userInfo"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from user_info a where 1 = 1
+        <include refid="sf-userInfo"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="userInfoResult">
+        select * from user_info a where 1 = 1
+        <include refid="sf-userInfo"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into user_info (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="userName != null">USER_NAME,</if>
+            <if test="realName != null">REAL_NAME,</if>
+            <if test="userType != null">USER_TYPE,</if>
+            <if test="userLevel != null">USER_LEVEL,</if>
+            <if test="password != null">PASSWORD,</if>
+            <if test="mobile != null">MOBILE,</if>
+            <if test="ownEntpId != null">OWN_ENTP_ID,</if>
+            <if test="ownEntpName != null">OWN_ENTP_NAME,</if>
+            <if test="sex != null">SEX,</if>
+            <if test="birthday != null">BIRTHDAY,</if>
+            <if test="positions != null">POSITIONS,</if>
+            <if test="officeTel != null">OFFICE_TEL,</if>
+            <if test="email != null">EMAIL,</if>
+            <if test="loginCount != null">LOGIN_COUNT,</if>
+            <if test="lastLoginIp != null">LAST_LOGIN_IP,</if>
+            <if test="lastLoginTime != null">LAST_LOGIN_TIME,</if>
+            <if test="orderValue != null">ORDER_VALUE,</if>
+            <if test="isLock != null">IS_LOCK,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="updateDate != null">UPDATE_DATE,</if>
+            <if test="updateUserId != null">UPDATE_USER_ID,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+            <if test="isAudit != null">IS_AUDIT,</if>
+            <if test="isActive != null">IS_ACTIVE,</if>
+            <if test="isActivate != null">IS_ACTIVATE,</if>
+            <if test="sign != null">SIGN,</if>
+            <if test="idCard != null">ID_CARD,</if>
+            <if test="keyIsActive != null">KEY_IS_ACTIVE,</if>
+            <if test="curScore != null">CUR_SCORE,</if>
+            <if test="device != null">DEVICE,</if>
+            <if test="deviceTokens != null">DEVICE_TOKENS,</if>
+            <if test="bankPindex != null">BANK_PINDEX,</if>
+            <if test="bankPname != null">BANK_PNAME,</if>
+            <if test="bankBranchName != null">BANK_BRANCH_NAME,</if>
+            <if test="bankName != null">BANK_NAME,</if>
+            <if test="bankAccount != null">BANK_ACCOUNT,</if>
+            <if test="bankAccountName != null">BANK_ACCOUNT_NAME,</if>
+            <if test="userLogo != null">USER_LOGO,</if>
+            <if test="appidWeixin != null">APPID_WEIXIN,</if>
+            <if test="appidWeixinUnionid != null">APPID_WEIXIN_UNIONID,</if>
+            <if test="appidWeixinIsFollow != null">APPID_WEIXIN_IS_FOLLOW,</if>
+            <if test="appidQq != null">APPID_QQ,</if>
+            <if test="appidWeibo != null">APPID_WEIBO,</if>
+            <if test="pIndex != null">P_INDEX,</if>
+            <if test="userNo != null">USER_NO,</if>
+            <if test="isEntp != null">IS_ENTP,</if>
+            <if test="isFuwu != null">IS_FUWU,</if>
+            <if test="isLianmeng != null">IS_LIANMENG,</if>
+            <if test="isLianmengDate != null">IS_LIANMENG_DATE,</if>
+            <if test="isLianmengCanceledDate != null">IS_LIANMENG_CANCELED_DATE,</if>
+            <if test="isDaqu != null">IS_DAQU,</if>
+            <if test="biDianzi != null">BI_DIANZI,</if>
+            <if test="biXiaofei != null">BI_XIAOFEI,</if>
+            <if test="biDianziLock != null">BI_DIANZI_LOCK,</if>
+            <if test="biDianziLost != null">BI_DIANZI_LOST,</if>
+            <if test="biHuokuan != null">BI_HUOKUAN,</if>
+            <if test="biHuokuanLock != null">BI_HUOKUAN_LOCK,</if>
+            <if test="biAid != null">BI_AID,</if>
+            <if test="biAidLock != null">BI_AID_LOCK,</if>
+            <if test="leijiMoneyUser != null">LEIJI_MONEY_USER,</if>
+            <if test="leijiMoneyEntp != null">LEIJI_MONEY_ENTP,</if>
+            <if test="leijiMoneyTuiguang != null">LEIJI_MONEY_TUIGUANG,</if>
+            <if test="ymid != null">YMID,</if>
+            <if test="userScoreUnion != null">USER_SCORE_UNION,</if>
+            <if test="passwordPay != null">PASSWORD_PAY,</if>
+            <if test="isSetSecurity != null">IS_SET_SECURITY,</if>
+            <if test="biDianziLockTuiguan != null">BI_DIANZI_LOCK_TUIGUAN,</if>
+            <if test="scoreUpdateDate != null">SCORE_UPDATE_DATE,</if>
+            <if test="isClosed != null">IS_CLOSED,</if>
+            <if test="deviceToken != null">DEVICE_TOKEN,</if>
+            <if test="deviceTokenApp != null">DEVICE_TOKEN_APP,</if>
+            <if test="isRenzheng != null">IS_RENZHENG,</if>
+            <if test="isCityManager != null">IS_CITY_MANAGER,</if>
+            <if test="isStart != null">IS_START,</if>
+            <if test="isHasUpdatePass != null">IS_HAS_UPDATE_PASS,</if>
+            <if test="biFuxiao != null">BI_FUXIAO,</if>
+            <if test="linkEntpId != null">LINK_ENTP_ID,</if>
+            <if test="imgIdCardZm != null">IMG_ID_CARD_ZM,</if>
+            <if test="imgIdCardFm != null">IMG_ID_CARD_FM,</if>
+            <if test="ownVillageId != null">OWN_VILLAGE_ID,</if>
+            <if test="ownVillageName != null">OWN_VILLAGE_NAME,</if>
+            <if test="isVillage != null">IS_VILLAGE,</if>
+            <if test="isPoor != null">IS_POOR,</if>
+            <if test="poorId != null">POOR_ID,</if>
+            <if test="cardEndDate != null">CARD_END_DATE,</if>
+            <if test="autograph != null">autograph,</if>
+            <if test="appKey != null">APP_KEY,</if>
+            <if test="isShuadan != null">IS_SHUADAN,</if>
+            <if test="linkArea != null">LINK_AREA,</if>
+            <if test="domainSite != null">DOMAIN_SITE,</if>
+            <if test="markUserId != null">MARK_USER_ID,</if>
+            <if test="serviceCenterId != null">SERVICE_CENTER_ID,</if>
+            <if test="serviceCenterName != null">SERVICE_CENTER_NAME,</if>
+            <if test="isCashier != null">IS_CASHIER,</if>
+            <if test="receiveAmountMax != null">receive_amount_max,</if>
+            <if test="receiveAmountBase != null">receive_amount_base,</if>
+            <if test="receiveAmountExtend != null">receive_amount_extend,</if>
+            <if test="fromType != null">FROM_TYPE,</if>
+            <if test="fromId != null">FROM_ID,</if>
+            <if test="renZhengDate != null">REN_ZHENG_DATE,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="realName != null">#{realName},</if>
+            <if test="userType != null">#{userType},</if>
+            <if test="userLevel != null">#{userLevel},</if>
+            <if test="password != null">#{password},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="ownEntpId != null">#{ownEntpId},</if>
+            <if test="ownEntpName != null">#{ownEntpName},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="positions != null">#{positions},</if>
+            <if test="officeTel != null">#{officeTel},</if>
+            <if test="email != null">#{email},</if>
+            <if test="loginCount != null">#{loginCount},</if>
+            <if test="lastLoginIp != null">#{lastLoginIp},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime},</if>
+            <if test="orderValue != null">#{orderValue},</if>
+            <if test="isLock != null">#{isLock},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+            <if test="isAudit != null">#{isAudit},</if>
+            <if test="isActive != null">#{isActive},</if>
+            <if test="isActivate != null">#{isActivate},</if>
+            <if test="sign != null">#{sign},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="keyIsActive != null">#{keyIsActive},</if>
+            <if test="curScore != null">#{curScore},</if>
+            <if test="device != null">#{device},</if>
+            <if test="deviceTokens != null">#{deviceTokens},</if>
+            <if test="bankPindex != null">#{bankPindex},</if>
+            <if test="bankPname != null">#{bankPname},</if>
+            <if test="bankBranchName != null">#{bankBranchName},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="bankAccount != null">#{bankAccount},</if>
+            <if test="bankAccountName != null">#{bankAccountName},</if>
+            <if test="userLogo != null">#{userLogo},</if>
+            <if test="appidWeixin != null">#{appidWeixin},</if>
+            <if test="appidWeixinUnionid != null">#{appidWeixinUnionid},</if>
+            <if test="appidWeixinIsFollow != null">#{appidWeixinIsFollow},</if>
+            <if test="appidQq != null">#{appidQq},</if>
+            <if test="appidWeibo != null">#{appidWeibo},</if>
+            <if test="pIndex != null">#{pIndex},</if>
+            <if test="userNo != null">#{userNo},</if>
+            <if test="isEntp != null">#{isEntp},</if>
+            <if test="isFuwu != null">#{isFuwu},</if>
+            <if test="isLianmeng != null">#{isLianmeng},</if>
+            <if test="isLianmengDate != null">#{isLianmengDate},</if>
+            <if test="isLianmengCanceledDate != null">#{isLianmengCanceledDate},</if>
+            <if test="isDaqu != null">#{isDaqu},</if>
+            <if test="biDianzi != null">#{biDianzi},</if>
+            <if test="biXiaofei != null">#{biXiaofei},</if>
+            <if test="biDianziLock != null">#{biDianziLock},</if>
+            <if test="biDianziLost != null">#{biDianziLost},</if>
+            <if test="biHuokuan != null">#{biHuokuan},</if>
+            <if test="biHuokuanLock != null">#{biHuokuanLock},</if>
+            <if test="biAid != null">#{biAid},</if>
+            <if test="biAidLock != null">#{biAidLock},</if>
+            <if test="leijiMoneyUser != null">#{leijiMoneyUser},</if>
+            <if test="leijiMoneyEntp != null">#{leijiMoneyEntp},</if>
+            <if test="leijiMoneyTuiguang != null">#{leijiMoneyTuiguang},</if>
+            <if test="ymid != null">#{ymid},</if>
+            <if test="userScoreUnion != null">#{userScoreUnion},</if>
+            <if test="passwordPay != null">#{passwordPay},</if>
+            <if test="isSetSecurity != null">#{isSetSecurity},</if>
+            <if test="biDianziLockTuiguan != null">#{biDianziLockTuiguan},</if>
+            <if test="scoreUpdateDate != null">#{scoreUpdateDate},</if>
+            <if test="isClosed != null">#{isClosed},</if>
+            <if test="deviceToken != null">#{deviceToken},</if>
+            <if test="deviceTokenApp != null">#{deviceTokenApp},</if>
+            <if test="isRenzheng != null">#{isRenzheng},</if>
+            <if test="isCityManager != null">#{isCityManager},</if>
+            <if test="isStart != null">#{isStart},</if>
+            <if test="isHasUpdatePass != null">#{isHasUpdatePass},</if>
+            <if test="biFuxiao != null">#{biFuxiao},</if>
+            <if test="linkEntpId != null">#{linkEntpId},</if>
+            <if test="imgIdCardZm != null">#{imgIdCardZm},</if>
+            <if test="imgIdCardFm != null">#{imgIdCardFm},</if>
+            <if test="ownVillageId != null">#{ownVillageId},</if>
+            <if test="ownVillageName != null">#{ownVillageName},</if>
+            <if test="isVillage != null">#{isVillage},</if>
+            <if test="isPoor != null">#{isPoor},</if>
+            <if test="poorId != null">#{poorId},</if>
+            <if test="cardEndDate != null">#{cardEndDate},</if>
+            <if test="autograph != null">#{autograph},</if>
+            <if test="appKey != null">#{appKey},</if>
+            <if test="isShuadan != null">#{isShuadan},</if>
+            <if test="linkArea != null">#{linkArea},</if>
+            <if test="domainSite != null">#{domainSite},</if>
+            <if test="markUserId != null">#{markUserId},</if>
+            <if test="serviceCenterId != null">#{serviceCenterId},</if>
+            <if test="serviceCenterName != null">#{serviceCenterName},</if>
+            <if test="isCashier != null">#{isCashier},</if>
+            <if test="receiveAmountMax != null">#{receiveAmountMax},</if>
+            <if test="receiveAmountBase != null">#{receiveAmountBase},</if>
+            <if test="receiveAmountExtend != null">#{receiveAmountExtend},</if>
+            <if test="fromType != null">#{fromType},</if>
+            <if test="fromId != null">#{fromId},</if>
+            <if test="renZhengDate != null">#{renZhengDate},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update user_info
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="userName != null">USER_NAME = #{userName},</if>
+            <if test="realName != null">REAL_NAME = #{realName},</if>
+            <if test="userType != null">USER_TYPE = #{userType},</if>
+            <if test="userLevel != null">USER_LEVEL = #{userLevel},</if>
+            <if test="password != null">PASSWORD = #{password},</if>
+            <if test="mobile != null">MOBILE = #{mobile},</if>
+            <if test="ownEntpId != null">OWN_ENTP_ID = #{ownEntpId},</if>
+            <if test="ownEntpName != null">OWN_ENTP_NAME = #{ownEntpName},</if>
+            <if test="sex != null">SEX = #{sex},</if>
+            <if test="birthday != null">BIRTHDAY = #{birthday},</if>
+            <if test="positions != null">POSITIONS = #{positions},</if>
+            <if test="officeTel != null">OFFICE_TEL = #{officeTel},</if>
+            <if test="email != null">EMAIL = #{email},</if>
+            <if test="loginCount != null">LOGIN_COUNT = #{loginCount},</if>
+            <if test="lastLoginIp != null">LAST_LOGIN_IP = #{lastLoginIp},</if>
+            <if test="lastLoginTime != null">LAST_LOGIN_TIME = #{lastLoginTime},</if>
+            <if test="orderValue != null">ORDER_VALUE = #{orderValue},</if>
+            <if test="isLock != null">IS_LOCK = #{isLock},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="updateDate != null">UPDATE_DATE = #{updateDate},</if>
+            <if test="updateUserId != null">UPDATE_USER_ID = #{updateUserId},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+            <if test="isAudit != null">IS_AUDIT = #{isAudit},</if>
+            <if test="isActive != null">IS_ACTIVE = #{isActive},</if>
+            <if test="isActivate != null">IS_ACTIVATE = #{isActivate},</if>
+            <if test="sign != null">SIGN = #{sign},</if>
+            <if test="idCard != null">ID_CARD = #{idCard},</if>
+            <if test="keyIsActive != null">KEY_IS_ACTIVE = #{keyIsActive},</if>
+            <if test="curScore != null">CUR_SCORE = #{curScore},</if>
+            <if test="device != null">DEVICE = #{device},</if>
+            <if test="deviceTokens != null">DEVICE_TOKENS = #{deviceTokens},</if>
+            <if test="bankPindex != null">BANK_PINDEX = #{bankPindex},</if>
+            <if test="bankPname != null">BANK_PNAME = #{bankPname},</if>
+            <if test="bankBranchName != null">BANK_BRANCH_NAME = #{bankBranchName},</if>
+            <if test="bankName != null">BANK_NAME = #{bankName},</if>
+            <if test="bankAccount != null">BANK_ACCOUNT = #{bankAccount},</if>
+            <if test="bankAccountName != null">BANK_ACCOUNT_NAME = #{bankAccountName},</if>
+            <if test="userLogo != null">USER_LOGO = #{userLogo},</if>
+            <if test="appidWeixin != null">APPID_WEIXIN = #{appidWeixin},</if>
+            <if test="appidWeixinUnionid != null">APPID_WEIXIN_UNIONID = #{appidWeixinUnionid},</if>
+            <if test="appidWeixinIsFollow != null">APPID_WEIXIN_IS_FOLLOW = #{appidWeixinIsFollow},</if>
+            <if test="appidQq != null">APPID_QQ = #{appidQq},</if>
+            <if test="appidWeibo != null">APPID_WEIBO = #{appidWeibo},</if>
+            <if test="pIndex != null">P_INDEX = #{pIndex},</if>
+            <if test="userNo != null">USER_NO = #{userNo},</if>
+            <if test="isEntp != null">IS_ENTP = #{isEntp},</if>
+            <if test="isFuwu != null">IS_FUWU = #{isFuwu},</if>
+            <if test="isLianmeng != null">IS_LIANMENG = #{isLianmeng},</if>
+            <if test="isLianmengDate != null">IS_LIANMENG_DATE = #{isLianmengDate},</if>
+            <if test="isLianmengCanceledDate != null">IS_LIANMENG_CANCELED_DATE = #{isLianmengCanceledDate},</if>
+            <if test="isDaqu != null">IS_DAQU = #{isDaqu},</if>
+            <if test="biDianzi != null">BI_DIANZI = #{biDianzi},</if>
+            <if test="biXiaofei != null">BI_XIAOFEI = #{biXiaofei},</if>
+            <if test="biDianziLock != null">BI_DIANZI_LOCK = #{biDianziLock},</if>
+            <if test="biDianziLost != null">BI_DIANZI_LOST = #{biDianziLost},</if>
+            <if test="biHuokuan != null">BI_HUOKUAN = #{biHuokuan},</if>
+            <if test="biHuokuanLock != null">BI_HUOKUAN_LOCK = #{biHuokuanLock},</if>
+            <if test="biAid != null">BI_AID = #{biAid},</if>
+            <if test="biAidLock != null">BI_AID_LOCK = #{biAidLock},</if>
+            <if test="leijiMoneyUser != null">LEIJI_MONEY_USER = #{leijiMoneyUser},</if>
+            <if test="leijiMoneyEntp != null">LEIJI_MONEY_ENTP = #{leijiMoneyEntp},</if>
+            <if test="leijiMoneyTuiguang != null">LEIJI_MONEY_TUIGUANG = #{leijiMoneyTuiguang},</if>
+            <if test="ymid != null">YMID = #{ymid},</if>
+            <if test="userScoreUnion != null">USER_SCORE_UNION = #{userScoreUnion},</if>
+            <if test="passwordPay != null">PASSWORD_PAY = #{passwordPay},</if>
+            <if test="isSetSecurity != null">IS_SET_SECURITY = #{isSetSecurity},</if>
+            <if test="biDianziLockTuiguan != null">BI_DIANZI_LOCK_TUIGUAN = #{biDianziLockTuiguan},</if>
+            <if test="scoreUpdateDate != null">SCORE_UPDATE_DATE = #{scoreUpdateDate},</if>
+            <if test="isClosed != null">IS_CLOSED = #{isClosed},</if>
+            <if test="deviceToken != null">DEVICE_TOKEN = #{deviceToken},</if>
+            <if test="deviceTokenApp != null">DEVICE_TOKEN_APP = #{deviceTokenApp},</if>
+            <if test="isRenzheng != null">IS_RENZHENG = #{isRenzheng},</if>
+            <if test="isCityManager != null">IS_CITY_MANAGER = #{isCityManager},</if>
+            <if test="isStart != null">IS_START = #{isStart},</if>
+            <if test="isHasUpdatePass != null">IS_HAS_UPDATE_PASS = #{isHasUpdatePass},</if>
+            <if test="biFuxiao != null">BI_FUXIAO = #{biFuxiao},</if>
+            <if test="linkEntpId != null">LINK_ENTP_ID = #{linkEntpId},</if>
+            <if test="imgIdCardZm != null">IMG_ID_CARD_ZM = #{imgIdCardZm},</if>
+            <if test="imgIdCardFm != null">IMG_ID_CARD_FM = #{imgIdCardFm},</if>
+            <if test="ownVillageId != null">OWN_VILLAGE_ID = #{ownVillageId},</if>
+            <if test="ownVillageName != null">OWN_VILLAGE_NAME = #{ownVillageName},</if>
+            <if test="isVillage != null">IS_VILLAGE = #{isVillage},</if>
+            <if test="isPoor != null">IS_POOR = #{isPoor},</if>
+            <if test="poorId != null">POOR_ID = #{poorId},</if>
+            <if test="cardEndDate != null">CARD_END_DATE = #{cardEndDate},</if>
+            <if test="autograph != null">autograph = #{autograph},</if>
+            <if test="appKey != null">APP_KEY = #{appKey},</if>
+            <if test="isShuadan != null">IS_SHUADAN = #{isShuadan},</if>
+            <if test="linkArea != null">LINK_AREA = #{linkArea},</if>
+            <if test="domainSite != null">DOMAIN_SITE = #{domainSite},</if>
+            <if test="markUserId != null">MARK_USER_ID = #{markUserId},</if>
+            <if test="serviceCenterId != null">SERVICE_CENTER_ID = #{serviceCenterId},</if>
+            <if test="serviceCenterName != null">SERVICE_CENTER_NAME = #{serviceCenterName},</if>
+            <if test="isCashier != null">IS_CASHIER = #{isCashier},</if>
+            <if test="receiveAmountMax != null">receive_amount_max = #{receiveAmountMax},</if>
+            <if test="receiveAmountBase != null">receive_amount_base = #{receiveAmountBase},</if>
+            <if test="receiveAmountExtend != null">receive_amount_extend = #{receiveAmountExtend},</if>
+            <if test="fromType != null">FROM_TYPE = #{fromType},</if>
+            <if test="fromId != null">FROM_ID = #{fromId},</if>
+            <if test="renZhengDate != null">REN_ZHENG_DATE = #{renZhengDate},</if>
+
+
+            <if test="map.addBiDianZi != null">BI_DIANZI = BI_DIANZI + #{map.addBiDianZi},</if>
+            <if test="map.subBiDianZi != null">BI_DIANZI = BI_DIANZI - #{map.subBiDianZi},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from user_info where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

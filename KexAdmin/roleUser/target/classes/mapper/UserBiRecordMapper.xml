@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author liu,jia -->
+<mapper namespace="com.moba.mapper.UserBiRecordMapper">
+
+    <resultMap id="userBiRecordResultForList" type="UserBiRecord">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="LINK_ID" property="linkId" jdbcType="INTEGER"/>
+        <result column="BI_CHU_OR_RU" property="biChuOrRu" jdbcType="INTEGER"/>
+        <result column="BI_TYPE" property="biType" jdbcType="INTEGER"/>
+        <result column="BI_NO_BEFORE" property="biNoBefore" jdbcType="DECIMAL"/>
+        <result column="BI_NO" property="biNo" jdbcType="DECIMAL"/>
+        <result column="BI_NO_AFTER" property="biNoAfter" jdbcType="DECIMAL"/>
+        <result column="BI_GET_TYPE" property="biGetType" jdbcType="INTEGER"/>
+        <result column="BI_GET_MEMO" property="biGetMemo" jdbcType="VARCHAR"/>
+        <result column="ADD_USER_ID" property="addUserId" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="BI_STATE" property="biState" jdbcType="INTEGER"/>
+        <result column="IS_DEL" property="isDel" jdbcType="INTEGER"/>
+        <result column="DEL_DATE" property="delDate" jdbcType="TIMESTAMP"/>
+        <result column="DEL_USER_ID" property="delUserId" jdbcType="INTEGER"/>
+        <result column="LINE_TYPE" property="lineType" jdbcType="INTEGER"/>
+        <result column="IS_FANHUAN" property="isFanhuan" jdbcType="INTEGER"/>
+        <result column="ADD_UNAME" property="addUname" jdbcType="VARCHAR"/>
+        <result column="DEST_UID" property="destUid" jdbcType="INTEGER"/>
+        <result column="DEST_UNAME" property="destUname" jdbcType="VARCHAR"/>
+        <result column="BI_RATE" property="biRate" jdbcType="DECIMAL"/>
+        <result column="GET_RATE" property="getRate" jdbcType="DECIMAL"/>
+        <result column="ORDER_ID" property="orderId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="userBiRecordResult" extends="userBiRecordResultForList" type="UserBiRecord">
+
+    </resultMap>
+
+    <sql id="sf-userBiRecord">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="linkId != null">AND a.LINK_ID = #{linkId}</if>
+        <if test="biChuOrRu != null">AND a.BI_CHU_OR_RU = #{biChuOrRu}</if>
+        <if test="biType != null">AND a.BI_TYPE = #{biType}</if>
+        <if test="biNoBefore != null">AND a.BI_NO_BEFORE = #{biNoBefore}</if>
+        <if test="biNo != null">AND a.BI_NO = #{biNo}</if>
+        <if test="biNoAfter != null">AND a.BI_NO_AFTER = #{biNoAfter}</if>
+        <if test="biGetType != null">AND a.BI_GET_TYPE = #{biGetType}</if>
+        <if test="biGetMemo != null and biGetMemo != ''">AND a.BI_GET_MEMO = #{biGetMemo}</if>
+        <if test="addUserId != null">AND a.ADD_USER_ID = #{addUserId}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="biState != null">AND a.BI_STATE = #{biState}</if>
+        <if test="isDel != null">AND a.IS_DEL = #{isDel}</if>
+        <if test="delDate != null">AND a.DEL_DATE = #{delDate}</if>
+        <if test="delUserId != null">AND a.DEL_USER_ID = #{delUserId}</if>
+        <if test="lineType != null">AND a.LINE_TYPE = #{lineType}</if>
+        <if test="isFanhuan != null">AND a.IS_FANHUAN = #{isFanhuan}</if>
+        <if test="addUname != null and addUname != ''">AND a.ADD_UNAME = #{addUname}</if>
+        <if test="destUid != null">AND a.DEST_UID = #{destUid}</if>
+        <if test="destUname != null and destUname != ''">AND a.DEST_UNAME = #{destUname}</if>
+        <if test="biRate != null">AND a.BI_RATE = #{biRate}</if>
+        <if test="getRate != null">AND a.GET_RATE = #{getRate}</if>
+        <if test="orderId != null">AND a.ORDER_ID = #{orderId}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="userBiRecordResult">
+        select * from user_bi_record a where 1 = 1
+        <include refid="sf-userBiRecord"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="userBiRecordResultForList">
+        select * from user_bi_record a where 1 = 1
+        <include refid="sf-userBiRecord"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from user_bi_record a where 1 = 1
+        <include refid="sf-userBiRecord"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="userBiRecordResult">
+        select * from user_bi_record a where 1 = 1
+        <include refid="sf-userBiRecord"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into user_bi_record (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="linkId != null">LINK_ID,</if>
+            <if test="biChuOrRu != null">BI_CHU_OR_RU,</if>
+            <if test="biType != null">BI_TYPE,</if>
+            <if test="biNoBefore != null">BI_NO_BEFORE,</if>
+            <if test="biNo != null">BI_NO,</if>
+            <if test="biNoAfter != null">BI_NO_AFTER,</if>
+            <if test="biGetType != null">BI_GET_TYPE,</if>
+            <if test="biGetMemo != null">BI_GET_MEMO,</if>
+            <if test="addUserId != null">ADD_USER_ID,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="biState != null">BI_STATE,</if>
+            <if test="isDel != null">IS_DEL,</if>
+            <if test="delDate != null">DEL_DATE,</if>
+            <if test="delUserId != null">DEL_USER_ID,</if>
+            <if test="lineType != null">LINE_TYPE,</if>
+            <if test="isFanhuan != null">IS_FANHUAN,</if>
+            <if test="addUname != null">ADD_UNAME,</if>
+            <if test="destUid != null">DEST_UID,</if>
+            <if test="destUname != null">DEST_UNAME,</if>
+            <if test="biRate != null">BI_RATE,</if>
+            <if test="getRate != null">GET_RATE,</if>
+            <if test="orderId != null">ORDER_ID,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="linkId != null">#{linkId},</if>
+            <if test="biChuOrRu != null">#{biChuOrRu},</if>
+            <if test="biType != null">#{biType},</if>
+            <if test="biNoBefore != null">#{biNoBefore},</if>
+            <if test="biNo != null">#{biNo},</if>
+            <if test="biNoAfter != null">#{biNoAfter},</if>
+            <if test="biGetType != null">#{biGetType},</if>
+            <if test="biGetMemo != null">#{biGetMemo},</if>
+            <if test="addUserId != null">#{addUserId},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="biState != null">#{biState},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="delDate != null">#{delDate},</if>
+            <if test="delUserId != null">#{delUserId},</if>
+            <if test="lineType != null">#{lineType},</if>
+            <if test="isFanhuan != null">#{isFanhuan},</if>
+            <if test="addUname != null">#{addUname},</if>
+            <if test="destUid != null">#{destUid},</if>
+            <if test="destUname != null">#{destUname},</if>
+            <if test="biRate != null">#{biRate},</if>
+            <if test="getRate != null">#{getRate},</if>
+            <if test="orderId != null">#{orderId},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update user_bi_record
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="linkId != null">LINK_ID = #{linkId},</if>
+            <if test="biChuOrRu != null">BI_CHU_OR_RU = #{biChuOrRu},</if>
+            <if test="biType != null">BI_TYPE = #{biType},</if>
+            <if test="biNoBefore != null">BI_NO_BEFORE = #{biNoBefore},</if>
+            <if test="biNo != null">BI_NO = #{biNo},</if>
+            <if test="biNoAfter != null">BI_NO_AFTER = #{biNoAfter},</if>
+            <if test="biGetType != null">BI_GET_TYPE = #{biGetType},</if>
+            <if test="biGetMemo != null">BI_GET_MEMO = #{biGetMemo},</if>
+            <if test="addUserId != null">ADD_USER_ID = #{addUserId},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="biState != null">BI_STATE = #{biState},</if>
+            <if test="isDel != null">IS_DEL = #{isDel},</if>
+            <if test="delDate != null">DEL_DATE = #{delDate},</if>
+            <if test="delUserId != null">DEL_USER_ID = #{delUserId},</if>
+            <if test="lineType != null">LINE_TYPE = #{lineType},</if>
+            <if test="isFanhuan != null">IS_FANHUAN = #{isFanhuan},</if>
+            <if test="addUname != null">ADD_UNAME = #{addUname},</if>
+            <if test="destUid != null">DEST_UID = #{destUid},</if>
+            <if test="destUname != null">DEST_UNAME = #{destUname},</if>
+            <if test="biRate != null">BI_RATE = #{biRate},</if>
+            <if test="getRate != null">GET_RATE = #{getRate},</if>
+            <if test="orderId != null">ORDER_ID = #{orderId},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from user_bi_record where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

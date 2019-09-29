@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/KexAdmin.iml" filepath="$PROJECT_DIR$/KexAdmin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/newsInfo/newsInfo.iml" filepath="$PROJECT_DIR$/newsInfo/newsInfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order/order.iml" filepath="$PROJECT_DIR$/order/order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppdm/ppdm.iml" filepath="$PROJECT_DIR$/ppdm/ppdm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/roleUser/roleUser.iml" filepath="$PROJECT_DIR$/roleUser/roleUser.iml" />
+    </modules>
+  </component>
+</project>

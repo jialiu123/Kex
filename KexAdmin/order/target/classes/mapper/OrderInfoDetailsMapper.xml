@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author li, bai, qiang -->
+<mapper namespace="com.moba.mapper.OrderInfoDetailsMapper">
+
+    <resultMap id="orderInfoDetailsResultForList" type="OrderInfoDetails">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="ORDER_ID" property="orderId" jdbcType="INTEGER"/>
+        <result column="ORDER_TYPE" property="orderType" jdbcType="INTEGER"/>
+        <result column="CLS_ID" property="clsId" jdbcType="INTEGER"/>
+        <result column="CLS_NAME" property="clsName" jdbcType="VARCHAR"/>
+        <result column="GOOD_STATE" property="goodState" jdbcType="INTEGER"/>
+        <result column="GOOD_COUNT" property="goodCount" jdbcType="INTEGER"/>
+        <result column="GOOD_PRICE" property="goodPrice" jdbcType="DECIMAL"/>
+        <result column="GOOD_UNIT" property="goodUnit" jdbcType="VARCHAR"/>
+        <result column="GOOD_SUM_PRICE" property="goodSumPrice" jdbcType="DECIMAL"/>
+        <result column="ACTUAL_MONEY" property="actualMoney" jdbcType="DECIMAL"/>
+        <result column="MATFLOW_PRICE" property="matflowPrice" jdbcType="DECIMAL"/>
+        <result column="ENTP_ID" property="entpId" jdbcType="INTEGER"/>
+        <result column="WL_COMP_NAME" property="wlCompName" jdbcType="VARCHAR"/>
+        <result column="COMM_ID" property="commId" jdbcType="INTEGER"/>
+        <result column="COMM_NAME" property="commName" jdbcType="VARCHAR"/>
+        <result column="COMM_TCZH_ID" property="commTczhId" jdbcType="INTEGER"/>
+        <result column="COMM_TCZH_NAME" property="commTczhName" jdbcType="VARCHAR"/>
+        <result column="DELIVERY_P_INDEX" property="deliveryPIndex" jdbcType="INTEGER"/>
+        <result column="PRICE_MODIFY_OLD" property="priceModifyOld" jdbcType="DECIMAL"/>
+        <result column="PRICE_MODIFY_DATE" property="priceModifyDate" jdbcType="TIMESTAMP"/>
+        <result column="PRICE_MODIFY_REMARK" property="priceModifyRemark" jdbcType="VARCHAR"/>
+        <result column="IS_PRICE_MODIFY" property="isPriceModify" jdbcType="INTEGER"/>
+        <result column="DELIVERY_WAY" property="deliveryWay" jdbcType="INTEGER"/>
+        <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP"/>
+        <result column="MATFLOW_PRICE_OLD" property="matflowPriceOld" jdbcType="DECIMAL"/>
+
+        <result column="COST_PRICE" property="costPrice" jdbcType="DECIMAL"/>
+        <result column="PROFIT_MONEY" property="profitMoney" jdbcType="DECIMAL"/>
+        <result column="IS_TUIHUO" property="isTuihuo" jdbcType="INTEGER"/>
+        <result column="IS_COMMENT" property="isComment" jdbcType="INTEGER"/>
+        <result column="FP_STATE" property="fpState" jdbcType="INTEGER"/>
+        <result column="YHQ_SON_ID" property="yhqSonId" jdbcType="INTEGER"/>
+        <result column="YHQ_MONEY" property="yhqMoney" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <resultMap id="orderInfoDetailsResult" extends="orderInfoDetailsResultForList" type="OrderInfoDetails">
+    </resultMap>
+
+    <sql id="sf-orderInfoDetails">
+        <if test="id != null">AND a.ID = #{id}</if>
+        <if test="orderId != null">AND a.ORDER_ID = #{orderId}</if>
+        <if test="orderType != null">AND a.ORDER_TYPE = #{orderType}</if>
+        <if test="clsId != null">AND a.CLS_ID = #{clsId}</if>
+        <if test="clsName != null and clsName != ''">AND a.CLS_NAME = #{clsName}</if>
+        <if test="goodState != null">AND a.GOOD_STATE = #{goodState}</if>
+        <if test="goodCount != null">AND a.GOOD_COUNT = #{goodCount}</if>
+        <if test="goodPrice != null">AND a.GOOD_PRICE = #{goodPrice}</if>
+        <if test="goodUnit != null and goodUnit != ''">AND a.GOOD_UNIT = #{goodUnit}</if>
+        <if test="goodSumPrice != null">AND a.GOOD_SUM_PRICE = #{goodSumPrice}</if>
+        <if test="actualMoney != null">AND a.ACTUAL_MONEY = #{actualMoney}</if>
+        <if test="matflowPrice != null">AND a.MATFLOW_PRICE = #{matflowPrice}</if>
+        <if test="entpId != null">AND a.ENTP_ID = #{entpId}</if>
+        <if test="wlCompName != null and wlCompName != ''">AND a.WL_COMP_NAME = #{wlCompName}</if>
+        <if test="commId != null">AND a.COMM_ID = #{commId}</if>
+        <if test="commName != null and commName != ''">AND a.COMM_NAME = #{commName}</if>
+        <if test="commTczhId != null">AND a.COMM_TCZH_ID = #{commTczhId}</if>
+        <if test="commTczhName != null and commTczhName != ''">AND a.COMM_TCZH_NAME = #{commTczhName}</if>
+        <if test="deliveryPIndex != null">AND a.DELIVERY_P_INDEX = #{deliveryPIndex}</if>
+        <if test="priceModifyOld != null">AND a.PRICE_MODIFY_OLD = #{priceModifyOld}</if>
+        <if test="priceModifyDate != null">AND a.PRICE_MODIFY_DATE = #{priceModifyDate}</if>
+        <if test="priceModifyRemark != null and priceModifyRemark != ''">AND a.PRICE_MODIFY_REMARK =
+            #{priceModifyRemark}
+        </if>
+        <if test="isPriceModify != null">AND a.IS_PRICE_MODIFY = #{isPriceModify}</if>
+        <if test="deliveryWay != null">AND a.DELIVERY_WAY = #{deliveryWay}</if>
+        <if test="addDate != null">AND a.ADD_DATE = #{addDate}</if>
+        <if test="matflowPriceOld != null">AND a.MATFLOW_PRICE_OLD = #{matflowPriceOld}</if>
+
+        <if test="costPrice != null">AND a.COST_PRICE = #{costPrice}</if>
+        <if test="profitMoney != null">AND a.PROFIT_MONEY = #{profitMoney}</if>
+        <if test="isTuihuo != null">AND a.IS_TUIHUO = #{isTuihuo}</if>
+        <if test="isComment != null">AND a.IS_COMMENT = #{isComment}</if>
+        <if test="fpState != null">AND a.FP_STATE = #{fpState}</if>
+        <if test="yhqSonId != null">AND a.YHQ_SON_ID = #{yhqSonId}</if>
+        <if test="yhqMoney != null">AND a.YHQ_MONEY = #{yhqMoney}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="orderInfoDetailsResult">
+        select * from order_info_details a where 1 = 1
+        <include refid="sf-orderInfoDetails"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="orderInfoDetailsResultForList">
+        select * from order_info_details a where 1 = 1
+        <include refid="sf-orderInfoDetails"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from order_info_details a where 1 = 1
+        <include refid="sf-orderInfoDetails"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="orderInfoDetailsResult">
+        select * from order_info_details a where 1 = 1
+        <include refid="sf-orderInfoDetails"/>
+        order by a.ID desc
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into order_info_details (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="orderId != null">ORDER_ID,</if>
+            <if test="orderType != null">ORDER_TYPE,</if>
+            <if test="clsId != null">CLS_ID,</if>
+            <if test="clsName != null">CLS_NAME,</if>
+            <if test="goodState != null">GOOD_STATE,</if>
+            <if test="goodCount != null">GOOD_COUNT,</if>
+            <if test="goodPrice != null">GOOD_PRICE,</if>
+            <if test="goodUnit != null">GOOD_UNIT,</if>
+            <if test="goodSumPrice != null">GOOD_SUM_PRICE,</if>
+            <if test="actualMoney != null">ACTUAL_MONEY,</if>
+            <if test="matflowPrice != null">MATFLOW_PRICE,</if>
+            <if test="entpId != null">ENTP_ID,</if>
+            <if test="wlCompName != null">WL_COMP_NAME,</if>
+            <if test="commId != null">COMM_ID,</if>
+            <if test="commName != null">COMM_NAME,</if>
+            <if test="commTczhId != null">COMM_TCZH_ID,</if>
+            <if test="commTczhName != null">COMM_TCZH_NAME,</if>
+            <if test="deliveryPIndex != null">DELIVERY_P_INDEX,</if>
+            <if test="priceModifyOld != null">PRICE_MODIFY_OLD,</if>
+            <if test="priceModifyDate != null">PRICE_MODIFY_DATE,</if>
+            <if test="priceModifyRemark != null">PRICE_MODIFY_REMARK,</if>
+            <if test="isPriceModify != null">IS_PRICE_MODIFY,</if>
+            <if test="deliveryWay != null">DELIVERY_WAY,</if>
+            <if test="addDate != null">ADD_DATE,</if>
+            <if test="matflowPriceOld != null">MATFLOW_PRICE_OLD,</if>
+
+            <if test="costPrice != null">COST_PRICE,</if>
+            <if test="profitMoney != null">PROFIT_MONEY,</if>
+            <if test="isTuihuo != null">IS_TUIHUO,</if>
+            <if test="isComment != null">IS_COMMENT,</if>
+            <if test="fpState != null">FP_STATE,</if>
+            <if test="yhqSonId != null">YHQ_SON_ID,</if>
+            <if test="yhqMoney != null">YHQ_MONEY,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="orderType != null">#{orderType},</if>
+            <if test="clsId != null">#{clsId},</if>
+            <if test="clsName != null">#{clsName},</if>
+            <if test="goodState != null">#{goodState},</if>
+            <if test="goodCount != null">#{goodCount},</if>
+            <if test="goodPrice != null">#{goodPrice},</if>
+            <if test="goodUnit != null">#{goodUnit},</if>
+            <if test="goodSumPrice != null">#{goodSumPrice},</if>
+            <if test="actualMoney != null">#{actualMoney},</if>
+            <if test="matflowPrice != null">#{matflowPrice},</if>
+            <if test="entpId != null">#{entpId},</if>
+            <if test="wlCompName != null">#{wlCompName},</if>
+            <if test="commId != null">#{commId},</if>
+            <if test="commName != null">#{commName},</if>
+            <if test="commTczhId != null">#{commTczhId},</if>
+            <if test="commTczhName != null">#{commTczhName},</if>
+            <if test="deliveryPIndex != null">#{deliveryPIndex},</if>
+            <if test="priceModifyOld != null">#{priceModifyOld},</if>
+            <if test="priceModifyDate != null">#{priceModifyDate},</if>
+            <if test="priceModifyRemark != null">#{priceModifyRemark},</if>
+            <if test="isPriceModify != null">#{isPriceModify},</if>
+            <if test="deliveryWay != null">#{deliveryWay},</if>
+            <if test="addDate != null">#{addDate},</if>
+            <if test="matflowPriceOld != null">#{matflowPriceOld},</if>
+
+            <if test="costPrice != null">#{costPrice},</if>
+            <if test="profitMoney != null">#{profitMoney},</if>
+            <if test="isTuihuo != null">#{isTuihuo},</if>
+            <if test="isComment != null">#{isComment},</if>
+            <if test="fpState != null">#{fpState},</if>
+            <if test="yhqSonId != null">#{yhqSonId},</if>
+            <if test="yhqMoney != null">#{yhqMoney},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update order_info_details
+        <set>
+            <if test="id != null">ID = #{id},</if>
+            <if test="orderId != null">ORDER_ID = #{orderId},</if>
+            <if test="orderType != null">ORDER_TYPE = #{orderType},</if>
+            <if test="clsId != null">CLS_ID = #{clsId},</if>
+            <if test="clsName != null">CLS_NAME = #{clsName},</if>
+            <if test="goodState != null">GOOD_STATE = #{goodState},</if>
+            <if test="goodCount != null">GOOD_COUNT = #{goodCount},</if>
+            <if test="goodPrice != null">GOOD_PRICE = #{goodPrice},</if>
+            <if test="goodUnit != null">GOOD_UNIT = #{goodUnit},</if>
+            <if test="goodSumPrice != null">GOOD_SUM_PRICE = #{goodSumPrice},</if>
+            <if test="actualMoney != null">ACTUAL_MONEY = #{actualMoney},</if>
+            <if test="matflowPrice != null">MATFLOW_PRICE = #{matflowPrice},</if>
+            <if test="entpId != null">ENTP_ID = #{entpId},</if>
+            <if test="wlCompName != null">WL_COMP_NAME = #{wlCompName},</if>
+            <if test="commId != null">COMM_ID = #{commId},</if>
+            <if test="commName != null">COMM_NAME = #{commName},</if>
+            <if test="commTczhId != null">COMM_TCZH_ID = #{commTczhId},</if>
+            <if test="commTczhName != null">COMM_TCZH_NAME = #{commTczhName},</if>
+            <if test="deliveryPIndex != null">DELIVERY_P_INDEX = #{deliveryPIndex},</if>
+            <if test="priceModifyOld != null">PRICE_MODIFY_OLD = #{priceModifyOld},</if>
+            <if test="priceModifyDate != null">PRICE_MODIFY_DATE = #{priceModifyDate},</if>
+            <if test="priceModifyRemark != null">PRICE_MODIFY_REMARK = #{priceModifyRemark},</if>
+            <if test="isPriceModify != null">IS_PRICE_MODIFY = #{isPriceModify},</if>
+            <if test="deliveryWay != null">DELIVERY_WAY = #{deliveryWay},</if>
+            <if test="addDate != null">ADD_DATE = #{addDate},</if>
+            <if test="matflowPriceOld != null">MATFLOW_PRICE_OLD = #{matflowPriceOld},</if>
+
+            <if test="costPrice != null">COST_PRICE = #{costPrice},</if>
+            <if test="profitMoney != null">PROFIT_MONEY = #{profitMoney},</if>
+            <if test="isTuihuo != null">IS_TUIHUO = #{isTuihuo},</if>
+            <if test="isComment != null">IS_COMMENT = #{isComment},</if>
+            <if test="fpState != null">FP_STATE = #{fpState},</if>
+            <if test="yhqSonId != null">YHQ_SON_ID = #{yhqSonId},</if>
+            <if test="yhqMoney != null">YHQ_MONEY = #{yhqMoney},</if>
+        </set>
+        <where>
+            <if test="id != null">ID = #{id}</if>
+            <if test="map.pks != null">
+                ID in
+                <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from order_info_details where 1 = 1
+        <if test="id != null">AND ID = #{id}</if>
+        <if test="map.pks != null">
+            AND ID in
+            <foreach collection="map.pks" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+</mapper>

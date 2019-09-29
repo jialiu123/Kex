@@ -1,0 +1,42 @@
+@import '~iview/src/styles/index.less';
+
+@menu-dark-title: #001529;
+@menu-dark-active-bg: #000c17;
+@layout-sider-background: #001529;
+
+.message-page{
+  &-con{
+    height: ~"calc(100vh - 176px)";
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    &.message-category-con{
+      border-right: 1px solid #e6e6e6;
+      width: 200px;
+    }
+    &.message-view-con{
+      position: absolute;
+      left: 216px;
+      top: 16px;
+      right: 16px;
+      bottom: 16px;
+      overflow: auto;
+      padding: 12px 20px 0;
+      .message-view-header{
+        margin-bottom: 20px;
+        .message-view-title{
+          display: inline-block;
+        }
+        .message-view-time{
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+.tableClass {border-top: 1px #e8eaec solid;border-left: 1px #e8eaec solid;width: 100%;line-height:23px;}
+.tableClass th{color:#000;background-color:#f8f8f9;font-size:12px;font-weight:bold;height:20px;text-align:center;border-bottom:1px #e8eaec solid;border-right:1px #e8eaec solid;padding:5px;}
+.tableClass td {padding: 10px 5px;border-bottom: 1px #e8eaec solid;border-right: 1px #e8eaec solid;word-break: break-word;}
+.tableClass td.title_item {background-color:#f8f8f9;font-weight:bold;text-align:right;}
+

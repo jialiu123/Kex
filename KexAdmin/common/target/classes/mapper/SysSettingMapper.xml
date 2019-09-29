@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @author ding,ning -->
+<mapper namespace="com.moba.mapper.SysSettingMapper">
+
+    <resultMap id="sysSettingResultForList" type="SysSetting">
+        <result column="TITLE" property="title" jdbcType="VARCHAR"/>
+        <result column="MEMO" property="memo" jdbcType="VARCHAR"/>
+        <result column="CONTENT" property="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="sysSettingResult" extends="sysSettingResultForList" type="SysSetting">
+    </resultMap>
+
+    <sql id="sf-sysSetting">
+        <if test="title != null and title != ''">AND a.TITLE = #{title}</if>
+        <if test="memo != null and memo != ''">AND a.MEMO = #{memo}</if>
+        <if test="content != null and content != ''">AND a.CONTENT = #{content}</if>
+    </sql>
+
+    <select id="selectEntity" resultMap="sysSettingResult">
+        select * from sys_setting a where 1 = 1
+        <include refid="sf-sysSetting"/>
+    </select>
+
+    <select id="selectEntityList" resultMap="sysSettingResultForList">
+        select * from sys_setting a where 1 = 1
+        <include refid="sf-sysSetting"/>
+        <if test="row.count != null and row.count != ''">limit 0, ${row.count}</if>
+    </select>
+
+    <select id="selectEntityCount" resultType="int">
+        select count(*) from sys_setting a where 1 = 1
+        <include refid="sf-sysSetting"/>
+    </select>
+
+    <select id="selectEntityPaginatedList" resultMap="sysSettingResult">
+        select * from sys_setting a where 1 = 1
+        <include refid="sf-sysSetting"/>
+        <if test="row.count != null and row.count != ''">limit ${row.first}, ${row.count}</if>
+    </select>
+
+    <insert id="insertEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into sys_setting (]]>
+        <trim suffixOverrides=",">
+            <if test="title != null">TITLE,</if>
+            <if test="memo != null">MEMO,</if>
+            <if test="content != null">CONTENT,</if>
+        </trim>
+        <![CDATA[) values (]]>
+        <trim suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="memo != null">#{memo},</if>
+            <if test="content != null">#{content},</if>
+        </trim>
+        <![CDATA[)]]>
+    </insert>
+
+    <update id="updateEntity">
+        update sys_setting
+        <set>
+            <if test="title != null">TITLE = #{title},</if>
+            <if test="memo != null">MEMO = #{memo},</if>
+            <if test="content != null">CONTENT = #{content},</if>
+        </set>
+        <where>
+            <if test="title != null">TITLE = #{title}</if>
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        delete from sys_setting where 1 = 1
+    </delete>
+
+</mapper>
